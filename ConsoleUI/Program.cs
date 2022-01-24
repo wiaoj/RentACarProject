@@ -4,6 +4,11 @@ using DataAccess.Concrete.InMemory;
 
 CarManager carManager = new(new InMemoryCarDal());
 
-foreach (var car in carManager.GetAll()) {
-    Console.WriteLine($"{car.Id} {car.BrandId} {car.ColorId} {car.Modelyear} {car.DailyPrice} {car.Description}");
-}
+carManager.GetAll().ForEach(car => Console.WriteLine($"Id: {car.Id} BrandId: {car.BrandId} ColorId: {car.ColorId} ModelYear: {car.Modelyear} Price: ${car.DailyPrice} daily Description: {car.Description}"));
+
+
+#region 2.seçenek
+//foreach (var car in carManager.GetAll()) {
+//    Console.WriteLine($"{car.Id} {car.BrandId} {car.ColorId} {car.Modelyear} {car.DailyPrice} {car.Description}");
+//}
+#endregion
