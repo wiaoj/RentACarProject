@@ -22,7 +22,7 @@ namespace Core.DataAccess.EntityFramework {
             }
         }
 
-        public TypeEntity Get(Expression<Func<TypeEntity, bool>> filter) {
+        public TypeEntity? Get(Expression<Func<TypeEntity, bool>> filter) {
             using (TypeContext context = new()) {
                 return context.Set<TypeEntity>().SingleOrDefault(filter);
             }
