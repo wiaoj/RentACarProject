@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.InMemory {
     public class InMemoryCarDal : ICarDal {
-
-        List<Car> _cars;
+        readonly List<Car> _cars;
 
         public InMemoryCarDal() {
 
@@ -55,7 +54,9 @@ namespace DataAccess.Concrete.InMemory {
         public void Update(Car car) {
             Car? carToUpdate = _cars.SingleOrDefault(c => c.Id.Equals(car.Id));
 
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             carToUpdate.Id = car.Id;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
             carToUpdate.BrandId = car.BrandId;
             carToUpdate.ColorId = car.ColorId;
             carToUpdate.Modelyear = car.Modelyear;

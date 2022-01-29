@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Result.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Abstract {
     public interface IRentalService {
@@ -8,6 +9,7 @@ namespace Business.Abstract {
         IResult Update(Rental rental);
         IDataResult<Rental> GetById(int rentalId);
         IDataResult<List<Rental>> GetAll();
+        IDataResult<List<CarRentalDetailDto>> GetRentalDetails();
         //IResult CheckRentalCar(Rental rental);
     }
 }

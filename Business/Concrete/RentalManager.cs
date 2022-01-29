@@ -5,6 +5,7 @@ using Core.Utilities.Result.Concrete.Error;
 using Core.Utilities.Result.Concrete.Success;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete {
     public class RentalManager : IRentalService {
@@ -30,6 +31,10 @@ namespace Business.Concrete {
 
         public IDataResult<Rental> GetById(int rentalId) {
             return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id.Equals(rentalId)));
+        }
+
+        public IDataResult<List<CarRentalDetailDto>> GetRentalDetails() {
+            return new SuccessDataResult<List<CarRentalDetailDto>>(_rentalDal.GetRentalDetails());
         }
 
         public IResult Update(Rental rental) {

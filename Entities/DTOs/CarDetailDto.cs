@@ -6,7 +6,7 @@ namespace Entities.DTOs {
         public String? Name { get; set; }
         public String? BrandName { get; set; }
         public String? ColorName { get; set; }
-        public int Modelyear { get; set; }
+        public int ModelYear { get; set; }
         public decimal DailyPrice { get; set; }
         public String? Description { get; set; }
     }
