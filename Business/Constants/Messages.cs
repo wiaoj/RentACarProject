@@ -38,6 +38,12 @@
 
 
 
-        internal static String MaintenanceTime = "Sistem şu anda bakımdadır. Lütfen daha sonra yeniden deneyiniz.";
+        internal static String MaintenanceTime = "Sistem şu anda bakımdadır, lütfen daha sonra yeniden deneyiniz";
+
+
+        internal static String EmailAdressNull = "Geçersiz mail adresi";
+        internal static String EmailAdressEmpty = "Mail adresiniz boş olamaz";
+        internal static String EmailAdressInvalidSpaces = "Mail adresinizde boşluk olmamalıdır";
+        internal static String EmailAdressInvalid = "Mail adresiniz @ karakteri içermelidir";
     }
 }

@@ -34,7 +34,7 @@ namespace WebAPI.Controllers {
         }
 
         [HttpGet]
-        public IActionResult GetAll(Color color) {
+        public IActionResult GetAll() {
             var result = _colorService.GetAll();
             return result.Success ? Ok(result) : BadRequest(result);
         }

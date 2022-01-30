@@ -7,7 +7,8 @@ using Entities.Concrete;
 
 GetCar();
 Console.WriteLine(new String('-', 20));
-AddRental();
+//AddRental();
+GetRental();
 
 static void GetCar() {
     CarManager carManager = new(new EfCarDal());
@@ -27,4 +28,7 @@ static void AddRental() {
     rentalManager.Add(rental);
 
     rentalManager.GetRentalDetails().Data.ForEach(rental => Console.WriteLine($"{rental.RentalId} {rental.CarName} {rental.CustomerFirstName} {rental.CustomerLastName} {rental.CustomerCompanyName} ${rental.DailyPrice} {rental.BrandName} {rental.ColorName} {rental.RentDate} {rental.ReturnDate}"));
+}
+static void GetRental() {
+    new RentalManager(new EfRentalDal()).GetRentalDetails().Data.ForEach(rental => Console.WriteLine($"{rental.RentalId} {rental.CarName} {rental.CustomerFirstName} {rental.CustomerLastName} {rental.CustomerCompanyName} ${rental.DailyPrice} {rental.BrandName} {rental.ColorName} {rental.RentDate} {rental.ReturnDate}"));
 }
