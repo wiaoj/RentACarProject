@@ -74,8 +74,8 @@ namespace Business.Concrete {
         }
 
         private IResult CheckCarImage(int carId) {
-            var result = _carImageDal.GetAll(carImage => carImage.CarId.Equals(carId)).Count;
-            return result > 0 ? new SuccessResult() : new ErrorResult();
+            var result = _carImageDal.GetAll(carImage => carImage.CarId.Equals(carId)).Any();
+            return result ? new SuccessResult() : new ErrorResult();
         }
 
         private IResult CheckIfCarImageLimitExceded(int carId) {
