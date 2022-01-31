@@ -8,6 +8,7 @@ namespace WebAPI.Controllers {
     public class CarsController : ControllerBase {
         readonly ICarService _carService;
         public CarsController(ICarService carService) => _carService = carService;
+
         [HttpPost]//[HttpPost("add")]
         public IActionResult Add(Car car) {
             var result = _carService.Add(car);

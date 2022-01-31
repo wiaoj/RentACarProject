@@ -27,13 +27,13 @@ namespace Business.Concrete {
         }
 
         [ValidationAspect(typeof(UserValidator))]
-        public IDataResult<List<User>> GetAll() {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll());
+        public IDataResult<User?> GetById(int id) {
+            return new SuccessDataResult<User?>(_userDal.Get(u => u.Id.Equals(id)));
         }
 
         [ValidationAspect(typeof(UserValidator))]
-        public IDataResult<User?> GetById(int id) {
-            return new SuccessDataResult<User?>(_userDal.Get(u => u.Id.Equals(id)));
+        public IDataResult<List<User>> GetAll() {
+            return new SuccessDataResult<List<User>>(_userDal.GetAll());
         }
 
         [ValidationAspect(typeof(UserValidator))]

@@ -9,7 +9,7 @@ namespace WebAPI.Controllers {
         readonly IBrandService _brandService;
         public BrandsController(IBrandService brandService) => _brandService = brandService;
 
-        [HttpGet]//[HttpGet("add")]
+        [HttpPost]//[HttpGet("add")]
         public IActionResult Add(Brand brand) {
             var result = _brandService.Add(brand);
             return result.Success ? Ok(result) : BadRequest(result);

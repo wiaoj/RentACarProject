@@ -12,9 +12,7 @@ using Entities.DTOs;
 namespace Business.Concrete {
     public class RentalManager : IRentalService {
         private readonly IRentalDal _rentalDal;
-        public RentalManager(IRentalDal rentaldal) {
-            _rentalDal = rentaldal;
-        }
+        public RentalManager(IRentalDal rentaldal) => _rentalDal = rentaldal;
 
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental) {
@@ -23,28 +21,28 @@ namespace Business.Concrete {
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
         }
-        
+
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Delete(Rental rental) {
             _rentalDal.Delete(rental);
             return new SuccessResult(Messages.RentalRemoved);
         }
-        
-        [ValidationAspect(typeof(RentalValidator))]
-        public IDataResult<List<Rental>> GetAll() {
-            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
-        }
-        
+
         [ValidationAspect(typeof(RentalValidator))]
         public IDataResult<Rental?> GetById(int id) {
             return new SuccessDataResult<Rental?>(_rentalDal.Get(r => r.Id.Equals(id)));
         }
-        
+
+        [ValidationAspect(typeof(RentalValidator))]
+        public IDataResult<List<Rental>> GetAll() {
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
+        }
+
         [ValidationAspect(typeof(RentalValidator))]
         public IDataResult<List<CarRentalDetailDto>> GetRentalDetails() {
             return new SuccessDataResult<List<CarRentalDetailDto>>(_rentalDal.GetRentalDetails());
         }
-        
+
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Update(Rental rental) {
             _rentalDal.Update(rental);

@@ -1,6 +1,5 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers {
@@ -8,9 +7,7 @@ namespace WebAPI.Controllers {
     [ApiController]
     public class RentalsController : ControllerBase {
         readonly IRentalService _rentalService;
-        public RentalsController(IRentalService rentalService) {
-            _rentalService = rentalService;
-        }
+        public RentalsController(IRentalService rentalService) => _rentalService = rentalService;
 
         [HttpPost]
         public IActionResult Add(Rental rental) {

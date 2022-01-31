@@ -33,9 +33,12 @@
         internal static String RentalRemoved = "Kiralama iptal edildi";
         internal static String RentalUpdated = "Kiralama güncellendi";
 
-
         internal static String RentalInUse = "Araç kullanımda";
 
+
+        internal static String CarImageAdded = "Araba resmi eklendi";
+        internal static String CarImageDeleted = "Araba resmi silindi";
+        internal static String CarImageUpdated = "Araba resmi güncellendi";
 
 
         internal static String MaintenanceTime = "Sistem şu anda bakımdadır, lütfen daha sonra yeniden deneyiniz";
@@ -45,5 +48,8 @@
         internal static String EmailAdressEmpty = "Mail adresiniz boş olamaz";
         internal static String EmailAdressInvalidSpaces = "Mail adresinizde boşluk olmamalıdır";
         internal static String EmailAdressInvalid = "Mail adresiniz @ karakteri içermelidir";
+
+
+        
     }
 }

@@ -25,15 +25,15 @@ namespace Business.Concrete {
             _colorDal.Delete(color);
             return new SuccessResult(Messages.ColorRemoved);
         }
-        
-        [ValidationAspect(typeof(ColorValidator))]
-        public IDataResult<List<Color>> GetAll() {
-            return new SuccessDataResult<List<Color>>(_colorDal.GetAll());
-        }
-        
+
         [ValidationAspect(typeof(ColorValidator))]
         public IDataResult<Color?> GetById(int id) {
             return new SuccessDataResult<Color?>(_colorDal.Get(c => c.Id.Equals(id)));
+        }
+
+        [ValidationAspect(typeof(ColorValidator))]
+        public IDataResult<List<Color>> GetAll() {
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll());
         }
         
         [ValidationAspect(typeof(ColorValidator))]

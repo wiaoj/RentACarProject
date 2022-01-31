@@ -12,9 +12,7 @@ using Entities.DTOs;
 namespace Business.Concrete {
     public class CarManager : ICarService {
         private readonly ICarDal _carDal;
-        public CarManager(ICarDal carDal) {
-            _carDal = carDal;
-        }
+        public CarManager(ICarDal carDal) => _carDal = carDal;
 
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car) {
@@ -29,13 +27,13 @@ namespace Business.Concrete {
         }
 
         [ValidationAspect(typeof(CarValidator))]
-        public IDataResult<List<Car>> GetAll() {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll());
+        public IDataResult<Car?> GetById(int id) {
+            return new SuccessDataResult<Car?>(_carDal.Get(c => c.Id.Equals(id)));
         }
 
         [ValidationAspect(typeof(CarValidator))]
-        public IDataResult<Car?> GetById(int carId) {
-            return new SuccessDataResult<Car?>(_carDal.Get(c => c.Id.Equals(carId)));
+        public IDataResult<List<Car>> GetAll() {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
 
         [ValidationAspect(typeof(CarValidator))]

@@ -1,7 +1,7 @@
 ﻿using Castle.DynamicProxy;
-using Core.Constants;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Interceptors.Autofac;
+using Core.Utilities.Messages;
 using FluentValidation;
 
 namespace Core.Aspect.Autofac {

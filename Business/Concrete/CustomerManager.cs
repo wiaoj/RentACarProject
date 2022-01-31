@@ -25,15 +25,14 @@ namespace Business.Concrete {
             _customerService.Delete(customer);
             return new SuccessResult(Messages.CustomerRemoved);
         }
-        
-        [ValidationAspect(typeof(CustomerValidator))]
-        public IDataResult<List<Customer>> GetAll() {
-            return new SuccessDataResult<List<Customer>>();
-        }
-        
+
         [ValidationAspect(typeof(CustomerValidator))]
         public IDataResult<Customer?> GetById(int customerId) {
             return new SuccessDataResult<Customer?>(_customerService.Get(c => c.UserId.Equals(customerId)));
+        }
+        [ValidationAspect(typeof(CustomerValidator))]
+        public IDataResult<List<Customer>> GetAll() {
+            return new SuccessDataResult<List<Customer>>();
         }
         
         [ValidationAspect(typeof(CustomerValidator))]

@@ -4,9 +4,9 @@ using Entities.Concrete;
 using Entities.DTOs;
 
 namespace DataAccess.Concrete.EntityFramework {
-    public class EfRentalDal : EfEntityRepositoryBase<Rental, RecapContext>, IRentalDal {
+    public class EfRentalDal : EfEntityRepositoryBase<Rental, ReCapContext>, IRentalDal {
         public List<CarRentalDetailDto> GetRentalDetails() {
-            using (RecapContext context = new()) {
+            using (ReCapContext context = new()) {
                 var result = from car in context.Cars
                              join rental in context.Rentals on car.Id equals rental.CarId
                              join brand in context.Brands on car.BrandId equals brand.Id

@@ -7,9 +7,7 @@ namespace WebAPI.Controllers {
     [ApiController]
     public class CustomersController : ControllerBase {
         readonly ICustomerService _customerService;
-        public CustomersController(ICustomerService customerService) {
-            _customerService = customerService;
-        }
+        public CustomersController(ICustomerService customerService) => _customerService = customerService;
 
         [HttpPost]
         public IActionResult Add(Customer customer) {
