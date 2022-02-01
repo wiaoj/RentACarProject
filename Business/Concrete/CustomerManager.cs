@@ -20,19 +20,18 @@ namespace Business.Concrete {
             return new SuccessResult(Messages.CustomerAdded);
         }
         
-        [ValidationAspect(typeof(CustomerValidator))]
+        //[ValidationAspect(typeof(CustomerValidator))]
         public IResult Delete(Customer customer) {
             _customerService.Delete(customer);
             return new SuccessResult(Messages.CustomerRemoved);
         }
 
-        [ValidationAspect(typeof(CustomerValidator))]
-        public IDataResult<Customer?> GetById(int customerId) {
-            return new SuccessDataResult<Customer?>(_customerService.Get(c => c.UserId.Equals(customerId)));
-        }
-        [ValidationAspect(typeof(CustomerValidator))]
         public IDataResult<List<Customer>> GetAll() {
             return new SuccessDataResult<List<Customer>>();
+        }
+
+        public IDataResult<Customer?> GetById(int customerId) {
+            return new SuccessDataResult<Customer?>(_customerService.Get(c => c.UserId.Equals(customerId)));
         }
         
         [ValidationAspect(typeof(CustomerValidator))]

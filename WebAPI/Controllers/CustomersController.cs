@@ -26,16 +26,16 @@ namespace WebAPI.Controllers {
             var result = _customerService.Delete(customer);
             return result.Success ? Ok(result) : BadRequest(result);
         }
-        
-        [HttpGet("getbyid")]
-        public IActionResult GetById(int id) { 
-            var result = _customerService.GetById(id);
+
+        [HttpGet]
+        public IActionResult GetAll() {
+            var result = _customerService.GetAll();
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpGet]
-        public IActionResult GetAll() { 
-            var result = _customerService.GetAll();
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id) { 
+            var result = _customerService.GetById(id);
             return result.Success ? Ok(result) : BadRequest(result);
         }
     }

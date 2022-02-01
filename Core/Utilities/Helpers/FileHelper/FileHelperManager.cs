@@ -4,7 +4,7 @@ namespace Core.Utilities.Helpers.FileHelper {
     // Projeme yükleyeceğim dosyalarla ilgili yükleme,silme,güncelleme işlemlerini bu class!ımda yapıyorum.
     //İşlemin nasıl gerçekleştiğini anlamak için yazdığım yorum satırlarını okumaya En alttaki *Upload* metodunundan başlayabilirsiniz.
     public class FileHelperManager : IFileHelper {
-        public String Upload(IFormFile file, String root) {
+        public String? Upload(IFormFile file, String root) {
             if (file.Length > 0) {     //file.Length=>Dosya uzunluğunu bayt olarak alır. burada Dosya gönderil mi gönderilmemiş diye test işlemi yapıldı.
                 if (!Directory.Exists(root)) {   //Directory=>System.IO'nın bir class'ı. burada ki işlem tam olarak şu. Bu Upload metodumun parametresi olan string root CarManager'dan gelmekte
                                                  //CarImageManager içerisine girdiğinizde buraya parametre olarak *PathConstants.ImagesPath* böyle bir şey gönderilidğini görürsünüz. PathConstants clası içerisine girdiğinizde string bir ifadeyle bir dizin adresi var
@@ -31,7 +31,7 @@ namespace Core.Utilities.Helpers.FileHelper {
             }
         }
 
-        public String Update(IFormFile file, String filePath, String root) { //Dosya güncellemek için ise gelen parametreye baktığımızda Güncellenecek yeni dosya, Eski dosyamızın kayıt dizini, ve yeni bir kayıt dizini
+        public String? Update(IFormFile file, String filePath, String root) { //Dosya güncellemek için ise gelen parametreye baktığımızda Güncellenecek yeni dosya, Eski dosyamızın kayıt dizini, ve yeni bir kayıt dizini
             if (File.Exists(filePath)) {// Tekrar if kontrolü ile parametrede gelen adreste öyle bir dosya var mı diye kontrol ediliyor.
 
                 File.Delete(filePath);//Eğer dosya var ise dosya bulunduğu yerden siliniyor.

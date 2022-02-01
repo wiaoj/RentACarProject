@@ -27,15 +27,15 @@ namespace WebAPI.Controllers {
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpGet("getbyid")]
-        public IActionResult GetById(int id) {
-            var result = _rentalService.GetById(id);
-            return result.Success ? Ok(result) : BadRequest(result);
-        }
-
         [HttpGet]
         public IActionResult GetAll() {
             var result = _rentalService.GetAll();
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
+
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id) {
+            var result = _rentalService.GetById(id);
             return result.Success ? Ok(result) : BadRequest(result);
         }
     }

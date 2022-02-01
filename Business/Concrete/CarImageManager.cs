@@ -18,45 +18,39 @@ namespace Business.Concrete {
         public CarImageManager(ICarImageDal carImageDal, IFileHelper fileHelper) : this(carImageDal) => _fileHelper = fileHelper;
         public CarImageManager(ICarImageDal carImageDal) => _carImageDal = carImageDal;
 
-        //[ValidationAspect(typeof(CarImageValidator))]
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage) {
             IResult? result = BusinessRules.Run(CheckIfCarImageLimitExceded(carImage.CarId));
-            if (result != null) {
-                return result;
-            }
+            if (result != null) return result;
             carImage.ImagePath = _fileHelper.Upload(file, Paths.ImagesPath);
-            carImage.Date = DateTime.Now;
+            //carImage.Date = DateTime.Now; //Entities/CarImage.cs içinde default değer atandı
             _carImageDal.Add(carImage);
             return new SuccessResult(Messages.CarImageAdded);
         }
 
-        //[ValidationAspect(typeof(CarImageValidator))]
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Delete(CarImage carImage) {
             _fileHelper.Delete($"{ Paths.ImagesPath + carImage.ImagePath }");
             _carImageDal.Delete(carImage);
             return new SuccessResult(Messages.CarImageDeleted);
         }
 
-        //[ValidationAspect(typeof(CarImageValidator))]
         public IDataResult<List<CarImage>> GetAll() {
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
         }
+        public IDataResult<CarImage> GetById(int id) {
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(carImage => carImage.Id.Equals(id)));
+        }
 
-        //[ValidationAspect(typeof(CarImageValidator))]
         public IDataResult<List<CarImage>> GetImagesByCarId(int carId) {
             var result = BusinessRules.Run(CheckCarImage(carId));
-            if (result != null) {
-                return new ErrorDataResult<List<CarImage>>(GetDefaultImage(carId).Data);
-            }
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(carImage => carImage.CarId.Equals(carId)));
+
+            return result is not null ? 
+                new ErrorDataResult<List<CarImage>>(GetDefaultImage(carId).Data) :
+                new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(carImage => carImage.CarId.Equals(carId)));
         }
 
-        //[ValidationAspect(typeof(CarImageValidator))]
-        public IDataResult<CarImage?> GetById(int id) {
-            return new SuccessDataResult<CarImage?>(_carImageDal.Get(carImage => carImage.Id.Equals(id)));
-        }
-
-        //[ValidationAspect(typeof(CarImageValidator))]
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(IFormFile file, CarImage carImage) {
             carImage.ImagePath = _fileHelper.Update(file, $"{ Paths.ImagesPath + carImage.ImagePath }", Paths.ImagesPath);
             _carImageDal.Update(carImage);
@@ -65,10 +59,10 @@ namespace Business.Concrete {
 
         private IDataResult<List<CarImage>> GetDefaultImage(int carId) {
             List<CarImage> carImage = new();
-            carImage.Add(new CarImage { 
-                CarId = carId, 
-                Date = DateTime.Now, 
-                ImagePath = "defaultImage.png" 
+            carImage.Add(new CarImage {
+                CarId = carId,
+                //Date = DateTime.Now, //Entities/CarImage.cs içinde default değer atandı
+                ImagePath = $"{Paths.DefaultImagePath}"
             });
             return new SuccessDataResult<List<CarImage>>(carImage);
         }
@@ -80,8 +74,7 @@ namespace Business.Concrete {
 
         private IResult CheckIfCarImageLimitExceded(int carId) {
             var result = _carImageDal.GetAll(carImage => carImage.CarId.Equals(carId)).Count;
-            return result >= 5 ? new ErrorResult() : new SuccessResult();
+            return result >= 5 ? new ErrorResult(Messages.CarImageLimitExceded) : new SuccessResult();
         }
-
     }
 }

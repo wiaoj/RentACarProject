@@ -22,23 +22,20 @@ namespace Business.Concrete {
             return new SuccessResult(Messages.RentalAdded);
         }
 
-        [ValidationAspect(typeof(RentalValidator))]
+        //[ValidationAspect(typeof(RentalValidator))]
         public IResult Delete(Rental rental) {
             _rentalDal.Delete(rental);
             return new SuccessResult(Messages.RentalRemoved);
         }
 
-        [ValidationAspect(typeof(RentalValidator))]
-        public IDataResult<Rental?> GetById(int id) {
-            return new SuccessDataResult<Rental?>(_rentalDal.Get(r => r.Id.Equals(id)));
-        }
-
-        [ValidationAspect(typeof(RentalValidator))]
         public IDataResult<List<Rental>> GetAll() {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
         }
 
-        [ValidationAspect(typeof(RentalValidator))]
+        public IDataResult<Rental> GetById(int id) {
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id.Equals(id)));
+        }
+
         public IDataResult<List<CarRentalDetailDto>> GetRentalDetails() {
             return new SuccessDataResult<List<CarRentalDetailDto>>(_rentalDal.GetRentalDetails());
         }

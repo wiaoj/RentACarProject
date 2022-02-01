@@ -6,13 +6,13 @@ namespace WebAPI.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class CarImagesController : ControllerBase {
-        readonly ICarImageService _carImageService;
+        private readonly ICarImageService _carImageService;
         public CarImagesController(ICarImageService carImageService) => _carImageService = carImageService;
 
         [HttpPost]
-        public IActionResult Add([FromForm] IFormFile file, [FromForm] CarImage carImage) {
+        public IActionResult Add([FromForm(Name = "Image")] IFormFile file, [FromForm] CarImage carImage) {
             var result = _carImageService.Add(file, carImage);
-            return result.Success ? Ok(result) : Ok();
+            return result.Success ? Ok(result) : BadRequest(result);
         }
 
         [HttpDelete]
@@ -23,14 +23,8 @@ namespace WebAPI.Controllers {
         }
 
         [HttpPut]
-        public IActionResult Update([FromForm] IFormFile file, [FromForm] CarImage carImage) {
+        public IActionResult Update([FromForm(Name = "Image")] IFormFile file, [FromForm] CarImage carImage) {
             var result = _carImageService.Update(file, carImage);
-            return result.Success ? Ok(result) : BadRequest(result);
-        }
-
-        [HttpGet("getbyid")]
-        public IActionResult GetById(int id) {
-            var result = _carImageService.GetById(id);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
@@ -40,7 +34,14 @@ namespace WebAPI.Controllers {
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id) {
+            var result = _carImageService.GetById(id);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
+
         [HttpGet("getimagesbycarid")]
+        //[Route("getimagesbycarid/{carId}")]
         public IActionResult GetImagesByCarId(int carId) {
             var result = _carImageService.GetImagesByCarId(carId);
             return result.Success ? Ok(result) : BadRequest(result);

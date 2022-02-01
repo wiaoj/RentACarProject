@@ -1,4 +1,6 @@
-﻿namespace Business.Constants {
+﻿using System.Runtime.Serialization;
+
+namespace Business.Constants {
     public static class Messages {
         internal static String CarAdded = "Araba eklendi";
         internal static String CarRemoved = "Araba kaldırıldı";
@@ -39,7 +41,7 @@
         internal static String CarImageAdded = "Araba resmi eklendi";
         internal static String CarImageDeleted = "Araba resmi silindi";
         internal static String CarImageUpdated = "Araba resmi güncellendi";
-
+        internal static String CarImageLimitExceded = "Maksimum araba resmine ulaşıldı";
 
         internal static String MaintenanceTime = "Sistem şu anda bakımdadır, lütfen daha sonra yeniden deneyiniz";
 
@@ -48,8 +50,8 @@
         internal static String EmailAdressEmpty = "Mail adresiniz boş olamaz";
         internal static String EmailAdressInvalidSpaces = "Mail adresinizde boşluk olmamalıdır";
         internal static String EmailAdressInvalid = "Mail adresiniz @ karakteri içermelidir";
-
-
         
+        
+        internal static String AuthorizationDenied = "Giriş için yetkiniz yok";
     }
 }

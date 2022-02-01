@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using Core.Entities.Abstract;
 using System.Linq.Expressions;
 
 namespace Core.DataAccess {
@@ -6,7 +6,7 @@ namespace Core.DataAccess {
         void Add(Type entity);
         void Update(Type entity);
         void Delete(Type entity);
-        Type? Get(Expression<Func<Type, bool>> filter);
+        Type Get(Expression<Func<Type, bool>> filter);
         List<Type> GetAll(Expression<Func<Type, bool>>? filter = null);
     }
 }

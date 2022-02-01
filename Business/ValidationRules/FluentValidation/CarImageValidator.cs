@@ -3,6 +3,8 @@ using FluentValidation;
 
 namespace Business.ValidationRules.FluentValidation {
     public class CarImageValidator : AbstractValidator<CarImage>{
-        public CarImageValidator() { }
+        public CarImageValidator() {
+            RuleFor(c => c.CarId).NotEmpty();
+        }
     }
 }
