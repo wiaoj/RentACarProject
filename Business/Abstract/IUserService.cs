@@ -9,7 +9,7 @@ namespace Business.Abstract {
         IDataResult<User> GetById(int id);
         IDataResult<List<User>> GetAll();
 
-        List<OperationClaim> GetClaims(User user);
-        User GetByMail(String emailAdress);
+        IDataResult<List<OperationClaim>> GetClaims(User user);
+        IDataResult<User> GetByMail(String emailAdress);
     }
 }

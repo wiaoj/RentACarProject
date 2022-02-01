@@ -40,12 +40,12 @@ namespace Business.Concrete {
             return new SuccessResult(Messages.UserUpdated);
         }
 
-        public List<OperationClaim> GetClaims(User user) {
-            return _userDal.GetClaims(user);
+        public IDataResult<List<OperationClaim>> GetClaims(User user) {
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
         }
 
-        public User GetByMail(string emailAdress) {
-            return _userDal.Get(u => u.EmailAdress.Equals(emailAdress));
+        public IDataResult<User> GetByMail(string emailAdress) {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.EmailAdress.Equals(emailAdress)));
         }
     }
 }

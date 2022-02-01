@@ -19,8 +19,8 @@ namespace Business.Concrete {
 
         public IDataResult<AccessToken> CreateAccessToken(User user) {
             var claims = _userService.GetClaims(user);
-            var accessToken = _tokenHelper.CreateToken(user, claims);
-            return new SuccessDataResult<AccessToken>(accessToken, "Token oluşturuldu");
+            var accessToken = _tokenHelper.CreateToken(user, claims.Data);
+            return new SuccessDataResult<AccessToken>(accessToken, "Token oluşturuldu" /*Messages.AccessTokenCreated)*/);
         }
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto) {
@@ -36,7 +36,7 @@ namespace Business.Concrete {
             //}
             //null ise giriş yapılacak
             return result is null ?
-                new SuccessDataResult<User>("Giriş başarılı") :
+                new SuccessDataResult<User>(user.Data,"Giriş başarılı" /*Messages.SuccessfulLogin*/) :
                 new ErrorDataResult<User>(result.Message);
         }
 
@@ -56,24 +56,24 @@ namespace Business.Concrete {
 
         public IResult UserExists(String emailAdress) {
             return BusinessRules.Run(CheckUserIfEmailAdress(emailAdress)) is null ?
-                new SuccessResult("Kullanıcı mevcut") :
+                new SuccessResult("Kullanıcı mevcut"/*Messages.UserAlreadyExists*/) :
                 new ErrorResult();
         }
 
 
         private IDataResult<User> CheckUserIfEmailAdress(String emailAdress) {
             //mail adresi yoksa null oluyor
-            var userToCheck = _userService.GetByMail(emailAdress);
-            return _userService.GetByMail(userToCheck.EmailAdress) is not null ?
+            var userToCheck = _userService.GetByMail(emailAdress).Data;
+            return userToCheck is not null ?
                 new SuccessDataResult<User>(userToCheck) :
-                new ErrorDataResult<User>("Kullanıcı bulunamadı");
+                new ErrorDataResult<User>("Kullanıcı bulunamadı"/*Messages.UserNotFound)*/);
         }
 
         private IResult VerifyPasswordHash(String password, byte[] passwordHash, byte[] passwordSalt) {
             return HashingHelper.VerifyPasswordHash(password,
                 passwordHash, passwordSalt) ?
                 new SuccessResult() :
-                new ErrorResult("Parolanız yanlış");
+                new ErrorResult("Parolanız yanlış"/*Messages.PasswordError*/);
         }
 
     }

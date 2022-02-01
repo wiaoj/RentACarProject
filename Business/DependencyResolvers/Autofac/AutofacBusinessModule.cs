@@ -35,8 +35,8 @@ namespace Business.DependencyResolvers.Autofac {
 
             builder.RegisterType<FileHelperManager>().As<IFileHelper>().SingleInstance();
 
-            builder.RegisterType<AuthManager>().As<IAuthService>();
-            builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+            builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
 
             builder.RegisterType<OperationClaimManager>().As<IOperationClaimService>().SingleInstance();
             builder.RegisterType<EfOperationClaimDal>().As<IOperationClaimDal>().SingleInstance();
