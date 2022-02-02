@@ -1,7 +1,8 @@
 ﻿using Business.Abstract;
+using Business.Aspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
-using Core.Aspect.Autofac;
+using Core.Aspect.Autofac.Validation;
 using Core.Entities.Concrete;
 using Core.Utilities.Result.Abstract;
 using Core.Utilities.Result.Concrete.Success;
@@ -14,13 +15,13 @@ namespace Business.Concrete {
             _userDal = userDal;
         }
 
+        //[SecuredOperation("admin,user.admin,user.add")]
         [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user) {
             _userDal.Add(user);
             return new SuccessResult(Messages.UserAdded);
         }
 
-        //[ValidationAspect(typeof(UserValidator))]
         public IResult Delete(User user) {
             _userDal.Delete(user);
             return new SuccessResult(Messages.UserDeleted);

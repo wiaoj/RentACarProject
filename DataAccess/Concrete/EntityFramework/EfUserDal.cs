@@ -14,6 +14,12 @@ namespace DataAccess.Concrete.EntityFramework {
                              Id = userOperationClaim.Id,
                              Name = operationClaim.Name
                          };
+            //if (result.ToList().Any()) {
+            //    new OperationClaim {
+            //        Id = 3,
+            //        Name = "User"
+            //    };
+            //}
             return result.ToList();
         }
     }

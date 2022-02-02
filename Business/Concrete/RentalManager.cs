@@ -1,7 +1,8 @@
 ﻿using Business.Abstract;
+using Business.Aspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
-using Core.Aspect.Autofac;
+using Core.Aspect.Autofac.Validation;
 using Core.Utilities.Result.Abstract;
 using Core.Utilities.Result.Concrete.Error;
 using Core.Utilities.Result.Concrete.Success;
@@ -10,10 +11,12 @@ using Entities.Concrete;
 using Entities.DTOs;
 
 namespace Business.Concrete {
+    //[SecuredOperation("admin")]
     public class RentalManager : IRentalService {
         private readonly IRentalDal _rentalDal;
         public RentalManager(IRentalDal rentaldal) => _rentalDal = rentaldal;
 
+        [SecuredOperation("admin,rental.admin,rental.add")]
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental) {
             if (rental.ReturnDate.Equals(null))
@@ -22,7 +25,7 @@ namespace Business.Concrete {
             return new SuccessResult(Messages.RentalAdded);
         }
 
-        //[ValidationAspect(typeof(RentalValidator))]
+        [SecuredOperation("admin,rental.admin,rental.delete")]
         public IResult Delete(Rental rental) {
             _rentalDal.Delete(rental);
             return new SuccessResult(Messages.RentalRemoved);
@@ -40,6 +43,7 @@ namespace Business.Concrete {
             return new SuccessDataResult<List<CarRentalDetailDto>>(_rentalDal.GetRentalDetails());
         }
 
+        [SecuredOperation("admin,rental.admin,rental.update")]
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Update(Rental rental) {
             _rentalDal.Update(rental);

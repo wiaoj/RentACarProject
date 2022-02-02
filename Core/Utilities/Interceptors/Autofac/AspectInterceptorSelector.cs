@@ -1,4 +1,5 @@
 ﻿using Castle.DynamicProxy;
+using Core.Aspect.Autofac.Performance;
 using System.Reflection;
 
 namespace Core.Utilities.Interceptors.Autofac {
@@ -8,6 +9,7 @@ namespace Core.Utilities.Interceptors.Autofac {
             var methodAttributes = type.GetMethod(method.Name).GetCustomAttributes<MethodInterceptionBaseAttribute>(true);
             classAttributes.AddRange(methodAttributes);
             //classAttributes.Add(new ExceptionLogAspect(typeof(FileLogger))); default logları eklemeyi sağlıyormuş
+            classAttributes.Add(new PerformanceAspect(5)); //tüm metodlar için 5 sn
             return classAttributes.OrderBy(x => x.Priority).ToArray();
         }
     }

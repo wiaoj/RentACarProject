@@ -1,7 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
-using Core.Aspect.Autofac;
+using Core.Aspect.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Helpers.FileHelper;
 using Core.Utilities.Result.Abstract;
@@ -46,7 +46,7 @@ namespace Business.Concrete {
             var result = BusinessRules.Run(CheckCarImage(carId));
 
             return result is not null ? 
-                new ErrorDataResult<List<CarImage>>(GetDefaultImage(carId).Data) :
+                new ErrorDataResult<List<CarImage>>(global::Business.Concrete.CarImageManager.GetDefaultImage(carId).Data) :
                 new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(carImage => carImage.CarId.Equals(carId)));
         }
 
@@ -56,8 +56,8 @@ namespace Business.Concrete {
             _carImageDal.Update(carImage);
             return new SuccessResult(Messages.CarImageUpdated);
         }
-
-        private IDataResult<List<CarImage>> GetDefaultImage(int carId) {
+        //static yapıldı resimde hata olursa bak
+        private static IDataResult<List<CarImage>> GetDefaultImage(int carId) {
             List<CarImage> carImage = new();
             carImage.Add(new CarImage {
                 CarId = carId,

@@ -4,12 +4,12 @@ using Core.Utilities.Interceptors.Autofac;
 using Core.Utilities.Messages;
 using FluentValidation;
 
-namespace Core.Aspect.Autofac {
+namespace Core.Aspect.Autofac.Validation {
     public class ValidationAspect : MethodInterception {
         private readonly Type _validatorType;
         public ValidationAspect(Type validatorType) {
             if (!typeof(IValidator).IsAssignableFrom(validatorType))
-                throw new System.Exception(Messages.WrongValidationType);
+                throw new Exception(Messages.WrongValidationType);
             _validatorType = validatorType;
         }
 

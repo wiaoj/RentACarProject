@@ -68,8 +68,8 @@ namespace Business.Concrete {
                 new SuccessDataResult<User>(userToCheck) :
                 new ErrorDataResult<User>("Kullanıcı bulunamadı"/*Messages.UserNotFound)*/);
         }
-
-        private IResult VerifyPasswordHash(String password, byte[] passwordHash, byte[] passwordSalt) {
+        //pass doğrulama çalışmazsa sorun burasıdır static kaldırılır
+        private static IResult VerifyPasswordHash(String password, byte[] passwordHash, byte[] passwordSalt) {
             return HashingHelper.VerifyPasswordHash(password,
                 passwordHash, passwordSalt) ?
                 new SuccessResult() :

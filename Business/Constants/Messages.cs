@@ -52,6 +52,6 @@ namespace Business.Constants {
         internal static String EmailAdressInvalid = "Mail adresiniz @ karakteri içermelidir";
         
         
-        internal static String AuthorizationDenied = "Giriş için yetkiniz yok";
+        internal static String AuthorizationDenied = "Bu işlem için yetkiniz bulunmamaktadır";
     }
 }
