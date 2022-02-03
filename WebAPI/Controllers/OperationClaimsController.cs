@@ -6,7 +6,7 @@ namespace WebAPI.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class OperationClaimsController : ControllerBase {
-        IOperationClaimService _operationClaimService;
+        private readonly IOperationClaimService _operationClaimService;
         public OperationClaimsController(IOperationClaimService operationClaimService) => _operationClaimService = operationClaimService;
 
         [HttpPost] //[HttpPost("add")]

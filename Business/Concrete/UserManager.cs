@@ -15,13 +15,14 @@ namespace Business.Concrete {
             _userDal = userDal;
         }
 
-        //[SecuredOperation("admin,user.admin,user.add")]
+        [SecuredOperation("admin,user.admin,user.add")]
         [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user) {
             _userDal.Add(user);
             return new SuccessResult(Messages.UserAdded);
         }
 
+        [SecuredOperation("admin,user.admin,user.delete")]
         public IResult Delete(User user) {
             _userDal.Delete(user);
             return new SuccessResult(Messages.UserDeleted);
@@ -35,6 +36,7 @@ namespace Business.Concrete {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Id.Equals(id)));
         }
 
+        [SecuredOperation("admin,user.admin,user.update")]
         [ValidationAspect(typeof(UserValidator))]
         public IResult Update(User user) {
             _userDal.Update(user);

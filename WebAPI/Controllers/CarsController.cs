@@ -29,6 +29,7 @@ namespace WebAPI.Controllers {
 
         [HttpGet]//[HttpGet("getall")]
         public IActionResult GetAll() {
+            Thread.Sleep(3000);
             var result = _carService.GetAll();
             return result.Success ? Ok(result) : BadRequest(result);
         }

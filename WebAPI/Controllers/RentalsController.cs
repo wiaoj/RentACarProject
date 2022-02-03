@@ -6,7 +6,7 @@ namespace WebAPI.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class RentalsController : ControllerBase {
-        readonly IRentalService _rentalService;
+        private readonly IRentalService _rentalService;
         public RentalsController(IRentalService rentalService) => _rentalService = rentalService;
 
         [HttpPost]
@@ -29,6 +29,7 @@ namespace WebAPI.Controllers {
 
         [HttpGet]
         public IActionResult GetAll() {
+            Thread.Sleep(3000);
             var result = _rentalService.GetAll();
             return result.Success ? Ok(result) : BadRequest(result);
         }
@@ -36,6 +37,12 @@ namespace WebAPI.Controllers {
         [HttpGet("getbyid")]
         public IActionResult GetById(int id) {
             var result = _rentalService.GetById(id);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
+
+        [HttpGet("rentaldetails")]
+        public IActionResult GetRentalDetails() {
+            var result = _rentalService.GetRentalDetails();
             return result.Success ? Ok(result) : BadRequest(result);
         }
     }

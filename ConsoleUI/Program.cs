@@ -29,5 +29,5 @@ static void AddRental() {
 
 }
 static void GetRental() {
-    new RentalManager(new EfRentalDal()).GetRentalDetails().Data.ForEach(rental => Console.WriteLine($"{rental.RentalId} {rental.CarName} {rental.CustomerFirstName} {rental.CustomerLastName} {rental.CustomerCompanyName} ${rental.DailyPrice} {rental.BrandName} {rental.ColorName} {rental.RentDate} {rental.ReturnDate}"));
+    new RentalManager(new EfRentalDal()).GetRentalDetails().Data.ForEach(rental => Console.WriteLine($"{rental.Id} {rental.CarName} {rental.CustomerFirstName} {rental.CustomerLastName} {rental.CustomerCompanyName} ${rental.DailyPrice} {rental.BrandName} {rental.ColorName} {rental.RentDate} {rental.ReturnDate}"));
 }

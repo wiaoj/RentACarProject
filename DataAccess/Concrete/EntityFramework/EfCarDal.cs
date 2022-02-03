@@ -17,7 +17,7 @@ namespace DataAccess.Concrete.EntityFramework {
                              Name = car.Name,
                              BrandName = brand.Name,
                              ColorName = color.Name,
-                             ModelYear = car.Modelyear,
+                             ModelYear = car.ModelYear,
                              DailyPrice = car.DailyPrice,
                              Description = car.Description,
                              ImagePath = (from image in context.CarImages where image.CarId.Equals(car.Id) select image.ImagePath).FirstOrDefault()

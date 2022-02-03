@@ -7,23 +7,24 @@ using Core.Utilities.Result.Abstract;
 using Core.Utilities.Result.Concrete.Success;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete {
-    [SecuredOperation("admin,customer.admin")]
+    //[SecuredOperation("admin,customer.admin")]
     public class CustomerManager : ICustomerService {
         private readonly ICustomerDal _customerService;
         public CustomerManager(ICustomerDal customerDal) {
             _customerService = customerDal;
         }
 
-        //[SecuredOperation("customer.add")]
+        [SecuredOperation("admin,customer.admin,customer.add")]
         [ValidationAspect(typeof(CustomerValidator))]
         public IResult Add(Customer customer) {
             _customerService.Add(customer);
             return new SuccessResult(Messages.CustomerAdded);
         }
 
-        //[SecuredOperation("customer.delete")]
+        [SecuredOperation("admin,customer.admin,customer.delete")]
         public IResult Delete(Customer customer) {
             _customerService.Delete(customer);
             return new SuccessResult(Messages.CustomerRemoved);
@@ -33,11 +34,15 @@ namespace Business.Concrete {
             return new SuccessDataResult<List<Customer>>();
         }
 
-        public IDataResult<Customer?> GetById(int customerId) {
-            return new SuccessDataResult<Customer?>(_customerService.Get(c => c.UserId.Equals(customerId)));
+        public IDataResult<Customer> GetById(int customerId) {
+            return new SuccessDataResult<Customer>(_customerService.Get(c => c.UserId.Equals(customerId)));
         }
 
-        //[SecuredOperation("customer.update")]
+        public IDataResult<List<CustomerDetailDto>> GetCustomerDetails() {
+            return new SuccessDataResult<List<CustomerDetailDto>>(_customerService.GetCustomerDetails());
+        }
+
+        [SecuredOperation("admin,customer.admin,customer.update")]
         [ValidationAspect(typeof(CustomerValidator))]
         public IResult Update(Customer customer) {
             _customerService.Update(customer);
