@@ -1,5 +1,5 @@
 import { CarRentalService } from './../../services/carRental/car-rental.service';
-import { CarRental } from './../../models/carRental/carRental';
+import { CarRental } from '../../models/carRental/carRental';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

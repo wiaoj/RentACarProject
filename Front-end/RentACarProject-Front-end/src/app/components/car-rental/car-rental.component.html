@@ -7,9 +7,9 @@
   <thead>
     <tr>
       <!-- <th scope="col">Id</th> -->
-      <th scope="col">Name</th>
-      <th scope="col">Surname</th>
-      <!-- <th scope="col">Renter</th> -->
+      <!-- <th scope="col">Name</th>
+      <th scope="col">Surname</th> -->
+      <th scope="col">Renter</th>
       <th scope="col">Company Name</th>
       <th scope="col">Car Name</th>
       <th scope="col">Brand</th>
@@ -22,8 +22,7 @@
   <tbody>
     <tr *ngFor="let carRental of carRentals">
       <!-- <td>{{carRental.id}}</td> -->
-      <td>{{carRental.customerFirstName}}</td>
-      <td>{{carRental.customerLastName}}</td>
+      <td>{{carRental.customerFirstName}} {{carRental.customerLastName}}</td>
       <td>{{carRental.customerCompanyName}}</td>
       <td>{{carRental.carName}}</td>
       <td>{{carRental.brandName}}</td>

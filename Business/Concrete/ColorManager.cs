@@ -12,9 +12,7 @@ using Entities.Concrete;
 namespace Business.Concrete {
     public class ColorManager : IColorService {
         private readonly IColorDal _colorDal;
-        public ColorManager(IColorDal colorDal) {
-            _colorDal = colorDal;
-        }
+        public ColorManager(IColorDal colorDal) => _colorDal = colorDal;
 
         [SecuredOperation("admin,color.admin,color.add")]
         [ValidationAspect(typeof(ColorValidator))]
