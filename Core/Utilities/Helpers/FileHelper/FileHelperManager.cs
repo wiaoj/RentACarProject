@@ -11,9 +11,9 @@ namespace Core.Utilities.Helpers.FileHelper {
                                                  //O adres bizim Yükleyeceğimiz dosyaların kayıt edileceği adres burada *Check if a directory Exists* ifadesi şunu belirtiyor dosyanın kaydedileceği adres dizini var mı? varsa if yapısının kod bloğundan ayrılır eğer yoksa içinde ki kodda dosyaların kayıt edilecek dizini oluşturur
                     Directory.CreateDirectory(root);
                 }
-                string extension = Path.GetExtension(file.FileName);    //Path.GetExtension(file.FileName)=>> Seçmiş olduğumuz dosyanın uzantısını elde ediyoruz.
-                string guid = GuidHelper.GuidHelper.CreateGuid();    //Core.Utilities.Helpers.GuidHelper klasürünün içinde ki GuidManager klasörüne giderseniz burada satırda ne yaptığımızı anlayacaksınız
-                string filePath = guid + extension; //Dosyanın oluşturduğum adını ve uzantısını yan yana getiriyorum. Mesela metin dosyası ise .txt gibi bu projemizde resim yükyeceğimiz için .jpg olacak uzantılar 
+                String extension = Path.GetExtension(file.FileName);    //Path.GetExtension(file.FileName)=>> Seçmiş olduğumuz dosyanın uzantısını elde ediyoruz.
+                String guid = GuidHelper.GuidHelper.CreateGuid();    //Core.Utilities.Helpers.GuidHelper klasürünün içinde ki GuidManager klasörüne giderseniz burada satırda ne yaptığımızı anlayacaksınız
+                String filePath = guid + extension; //Dosyanın oluşturduğum adını ve uzantısını yan yana getiriyorum. Mesela metin dosyası ise .txt gibi bu projemizde resim yükyeceğimiz için .jpg olacak uzantılar 
 
                 using (FileStream fileStream = File.Create(root + filePath)) {  //Burada en başta FileStrem class'ının bir örneği oluşturulu., sonrasında File.Create(root + newPath)=>Belirtilen yolda bir dosya oluşturur veya üzerine yazar. (root + newPath)=>Oluşturulacak dosyanın yolu ve adı.
                     file.CopyTo(fileStream);    //Kopyalanacak dosyanın kopyalanacağı akışı belirtti. yani yukarıda gelen IFromFile türündeki file dosyasınınnereye kopyalacağını söyledik.
@@ -23,7 +23,7 @@ namespace Core.Utilities.Helpers.FileHelper {
             }
             return null;
         }
-        public void Delete(string filePath) { //Burada ki string filePath, 'CarImageManager'dan gelen dosyamın kaydedildiği adres ve adı 
+        public void Delete(String filePath) { //Burada ki string filePath, 'CarImageManager'dan gelen dosyamın kaydedildiği adres ve adı 
 
             if (File.Exists(filePath)) { //if kontrolü ile parametrede gelen adreste öyle bir dosya var mı diye kontrol ediliyor.
 

@@ -1,17 +1,31 @@
-<div class="card" style="width: 20rem; background-color: aqua;">
-  <!-- <img src="https://localhost:44388/Uploads/Images/7fa3daf0-a6c9-42ab-8e05-69bafbf2a1a6.jpg" class="card-img-top" alt="..."> -->
-  <div *ngFor="let carDetail of carDetails" class="card-body" style="text-align: center;">
-    <h5 class="card-title">{{carDetail.name}}</h5>
-    <p class="card-text">{{carDetail.brandName}}</p>
-    <p class="card-text">{{carDetail.colorName}}</p>
-    <p class="card-text">{{carDetail.modelYear}}</p>
-    <p class="card-text">${{carDetail.dailyPrice}}</p>
-    <p class="card-text">{{carDetail.description}}</p>
-    <div *ngFor="let imagePath of carDetail.imagePaths" class="card-text">
-      <p>{{imagePath}}</p>
-      <img src="https://localhost:44388/Uploads/Images/cfd2506c-e8c0-4498-9753-4d006fa03216.jpg" alt="">
-    <img [src]="getImage(imagePath)" class="card-img-top" alt="">
-    <!-- <img src="https://localhost:44388/Uploads/Images/cfd2506c-e8c0-4498-9753-4d006fa03216.jpg" alt="---"/> -->
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+<div *ngFor="let carDetail of carDetails" id="carouselExampleInterval" class="carousel slide " data-bs-ride="carousel" style="text-align: center;">
+  <div class="carousel-inner">
+    <div *ngFor="let image of imagePaths; index as i; first as firstImage" [ngClass]="{active: firstImage}" class="carousel-item" data-bs-interval="3000">
+      <img [src]="showImageSrc(image.imagePath)" width="260" height="300" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <div *ngIf="showImageButton==true">
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <div class="card border-dark mb-3">
+  <div class="card-header">Car Name: {{carDetail.name}}</div>
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Brand: {{carDetail.brandName}}</li>
+      <li class="list-group-item">Color: {{carDetail.colorName}}</li>
+      <li class="list-group-item">Model Year: {{carDetail.modelYear}}</li>
+      <!-- ${{carDetail.dailyPrice}} per day -->
+      <li class="list-group-item">{{carDetail.description}}</li>
+    </ul>
+  </div>
+  <div class="card-footer text-success bg-transparent border-dark">
+    ${{carDetail.dailyPrice}} per day
   </div>
 </div>

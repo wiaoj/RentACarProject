@@ -1,3 +1,4 @@
+import { CarImage } from './../carImage/carImage';
 export interface CarDetailsById {
   id: number;
   name: string;
