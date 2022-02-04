@@ -1,0 +1,17 @@
+<div class="card" style="width: 20rem; background-color: aqua;">
+  <!-- <img src="https://localhost:44388/Uploads/Images/7fa3daf0-a6c9-42ab-8e05-69bafbf2a1a6.jpg" class="card-img-top" alt="..."> -->
+  <div *ngFor="let carDetail of carDetails" class="card-body" style="text-align: center;">
+    <h5 class="card-title">{{carDetail.name}}</h5>
+    <p class="card-text">{{carDetail.brandName}}</p>
+    <p class="card-text">{{carDetail.colorName}}</p>
+    <p class="card-text">{{carDetail.modelYear}}</p>
+    <p class="card-text">${{carDetail.dailyPrice}}</p>
+    <p class="card-text">{{carDetail.description}}</p>
+    <div *ngFor="let imagePath of carDetail.imagePaths" class="card-text">
+      <p>{{imagePath}}</p>
+      <img src="https://localhost:44388/Uploads/Images/cfd2506c-e8c0-4498-9753-4d006fa03216.jpg" alt="">
+    <img [src]="getImage(imagePath)" class="card-img-top" alt="">
+    <!-- <img src="https://localhost:44388/Uploads/Images/cfd2506c-e8c0-4498-9753-4d006fa03216.jpg" alt="---"/> -->
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>

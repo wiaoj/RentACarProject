@@ -1,19 +1,7 @@
-<div class="d-flex justify-content-center">
-  <div *ngIf="dataLoaded==false" class="spinner-grow text-info" style="width: 5rem; height: 5rem;" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-</div>
-<table *ngIf="dataLoaded==true" class="table table-primary table-hover" style="text-align: center;">
-  <thead>
-    <tr>
-      <!-- <th scope="col">Id</th> -->
-      <th scope="col">Brand Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let brand of brands">
-      <!-- <td>{{brand.id}}</td> -->
-      <td>{{brand.name}}</td>
-    </tr>
-  </tbody>
-</table>
+<ul class="list-group" style="text-align: center; font-weight: 400;">
+  <li (click)="clearCurrentBrand()" routerLink="" [class]="getAllBrandClass()">All Brands</li>
+  <li (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.id}}" *ngFor="let brand of brands"
+    [class]="getCurrentBrandClass(brand)">
+    {{brand.name}}
+  </li>
+</ul>

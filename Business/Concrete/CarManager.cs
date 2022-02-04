@@ -42,19 +42,23 @@ namespace Business.Concrete {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.Id.Equals(id)));
         }
 
-        [CacheAspect]
-        public IDataResult<List<CarDetailDto>> GetCarDetails() {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
+        public IDataResult<List<CarDetailDto>> GetCarDetailsById(int id) {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailsById(id));
         }
 
         [CacheAspect]
-        public IDataResult<List<Car>> GetCarsByBrandId(int brandId) {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId.Equals(brandId)));
+        public IDataResult<List<CarDetailDto>> GetCarsDetails() {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarsDetails());
         }
 
         [CacheAspect]
-        public IDataResult<List<Car>> GetCarsByColorId(int colorId) {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId.Equals(colorId)));
+        public IDataResult<List<CarDetailDto>> GetCarsDetailsByBrandId(int brandId) {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarsDetailsByBrandId(brandId));
+        }
+
+        [CacheAspect]
+        public IDataResult<List<CarDetailDto>> GetCarsDetailsByColorId(int colorId) {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarsDetailsByColorId(colorId));
         }
 
         [SecuredOperation("admin,car.admin,car.update")]

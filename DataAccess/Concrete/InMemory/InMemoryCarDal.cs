@@ -47,13 +47,24 @@ namespace DataAccess.Concrete.InMemory {
             return _cars.Where(c => c.Id.Equals(carId)).ToList();
         }
 
-        public List<CarDetailDto> GetCarDetails() {
+        public List<CarDetailDto> GetCarDetailsById(int id) {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> GetCarsDetails() {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> GetCarsDetailsByBrandId(int brandId) {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> GetCarsDetailsByColorId(int colorId) {
             throw new NotImplementedException();
         }
 
         public void Update(Car car) {
             Car? carToUpdate = _cars.SingleOrDefault(c => c.Id.Equals(car.Id));
-
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
             carToUpdate.Id = car.Id;
 #pragma warning restore CS8602 // Dereference of a possibly null reference.

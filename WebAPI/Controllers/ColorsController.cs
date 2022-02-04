@@ -29,7 +29,7 @@ namespace WebAPI.Controllers {
 
         [HttpGet]
         public IActionResult GetAll() {
-            Thread.Sleep(3000);
+            Thread.Sleep(1000);
             var result = _colorService.GetAll();
             return result.Success ? Ok(result) : BadRequest(result);
         }

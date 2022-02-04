@@ -9,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BrandComponent implements OnInit {
   brands: Brand[] = [];
-  dataLoaded = false;
+  currentBrand: Brand;
+  //dataLoaded = false;
   constructor(private brandService: BrandService) {}
 
   ngOnInit(): void {
@@ -19,7 +20,31 @@ export class BrandComponent implements OnInit {
   getBrands() {
     this.brandService.getBrands().subscribe((response) => {
       this.brands = response.data;
-      this.dataLoaded = true;
+      //this.dataLoaded = true;
     });
+  }
+
+  setCurrentBrand(brand: Brand) {
+    this.currentBrand = brand;
+  }
+  clearCurrentBrand() {
+    this.currentBrand = { id: 0, name: '' };
+  }
+
+  getCurrentBrandClass(brand: Brand) {
+    if (brand == this.currentBrand) {
+      return 'list-group-item list-group-item-action list-group-item-info';
+    } else {
+      return 'list-group-item list-group-item-action list-group-item-primary';
+    }
+  }
+
+  getAllBrandClass() {
+    if (this.currentBrand) {
+      return 'list-group-item list-group-item-action list-group-item-primary';
+    } else {
+      //bak
+      return 'list-group-item list-group-item-action list-group-item-info';
+    }
   }
 }

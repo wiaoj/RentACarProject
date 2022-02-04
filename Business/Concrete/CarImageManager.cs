@@ -44,9 +44,8 @@ namespace Business.Concrete {
 
         public IDataResult<List<CarImage>> GetImagesByCarId(int carId) {
             var result = BusinessRules.Run(CheckCarImage(carId));
-
             return result is not null ? 
-                new ErrorDataResult<List<CarImage>>(global::Business.Concrete.CarImageManager.GetDefaultImage(carId).Data) :
+                new ErrorDataResult<List<CarImage>>(GetDefaultImage(carId).Data) :
                 new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(carImage => carImage.CarId.Equals(carId)));
         }
 

@@ -9,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ColorComponent implements OnInit {
   colors: Color[] = [];
-  dataLoaded = false;
+  currentColor: Color;
+  //dataLoaded = false;
   constructor(private colorService: ColorService) {}
 
   ngOnInit(): void {
@@ -19,7 +20,29 @@ export class ColorComponent implements OnInit {
   getColors() {
     this.colorService.getColors().subscribe((response) => {
       this.colors = response.data;
-      this.dataLoaded = true;
+      //this.dataLoaded = true;
     });
+  }
+
+  setCurrentColor(color: Color) {
+    this.currentColor = color;
+  }
+  clearCurrentColor() {
+    this.currentColor = { id: 0, name: '' };
+  }
+  getCurrentColorClass(color: Color) {
+    if (color == this.currentColor) {
+      return 'list-group-item list-group-item-action list-group-item-dark';
+    } else {
+      return 'list-group-item list-group-item-action list-group-item-light';
+    }
+  }
+
+  getAllColorClass() {
+    if (this.currentColor) {
+      return 'list-group-item list-group-item-action list-group-item-light';
+    } else {
+      return 'list-group-item list-group-item-action list-group-item-dark';
+    }
   }
 }
