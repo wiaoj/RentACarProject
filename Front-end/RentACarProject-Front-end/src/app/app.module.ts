@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,6 +15,9 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrandFilterPipePipe } from './pipes/brand/brand-filter-pipe.pipe';
+import { ColorFilterPipePipe } from './pipes/color/color-filter-pipe.pipe';
+import { CarFilterPipePipe } from './pipes/car/car-filter-pipe.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,16 +27,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ColorComponent,
     CustomerComponent,
     CarRentalComponent,
-    CarDetailComponent
+    CarDetailComponent,
+    BrandFilterPipePipe,
+    ColorFilterPipePipe,
+    CarFilterPipePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     BrowserAnimationsModule, // required animations module for toastr
     ToastrModule.forRoot({
       positionClass:"toast-top-right",
       autoDismiss:true,
+      closeButton:true,
       maxOpened:3,
       progressBar:true
     })

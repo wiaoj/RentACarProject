@@ -11,8 +11,12 @@ import { Component, OnInit } from '@angular/core';
 export class BrandComponent implements OnInit {
   brands: Brand[] = [];
   currentBrand: Brand;
+  filterText: string = '';
   //dataLoaded = false;
-  constructor(private brandService: BrandService, private toastr:ToastrService) {}
+  constructor(
+    private brandService: BrandService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.getBrands();
@@ -27,7 +31,10 @@ export class BrandComponent implements OnInit {
 
   setCurrentBrand(brand: Brand) {
     this.currentBrand = brand;
-    this.toastr.success(this.currentBrand.name, this.currentBrand.id.toString());
+    this.toastr.success(
+      this.currentBrand.name,
+      this.currentBrand.id.toString()
+    );
   }
   clearCurrentBrand() {
     this.currentBrand = { id: 0, name: '' };
@@ -48,5 +55,10 @@ export class BrandComponent implements OnInit {
       //bak
       return 'list-group-item list-group-item-action list-group-item-info';
     }
+  }
+
+  clearInputBox() {
+    this.clearCurrentBrand();
+    this.filterText = '';
   }
 }

@@ -12,6 +12,7 @@ export class CarComponent implements OnInit {
   cars: Car[] = [];
   dataLoaded = false;
   carDetails = false;
+  filterText:string ="";
   constructor(
     private carService: CarService,
     private activatedRoute: ActivatedRoute
@@ -61,5 +62,9 @@ export class CarComponent implements OnInit {
       this.cars = response.data;
       this.dataLoaded = true;
     });
+  }
+
+  clearInputBox(){
+    this.filterText = "";
   }
 }

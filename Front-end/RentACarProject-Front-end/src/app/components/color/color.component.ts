@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class ColorComponent implements OnInit {
   colors: Color[] = [];
   currentColor: Color;
+  filterText: string = '';
   //dataLoaded = false;
   constructor(private colorService: ColorService) {}
 
@@ -44,5 +45,9 @@ export class ColorComponent implements OnInit {
     } else {
       return 'list-group-item list-group-item-action list-group-item-dark';
     }
+  }
+  clearInputBox() {
+    this.clearCurrentColor();
+    this.filterText = '';
   }
 }

@@ -1,3 +1,9 @@
+<p></p>
+<div class="input-group mb-3">
+  <input type="text" [(ngModel)]="filterText" class="form-control" placeholder="Search">
+  <button (click)="clearInputBox()" class="btn btn-light" type="button" id="button">X</button>
+</div>
+
 <div class="d-flex justify-content-center">
   <div *ngIf="dataLoaded==false" class="spinner-grow text-info" style="width: 5rem; height: 5rem;" role="status">
     <span class="visually-hidden">Loading...</span>
@@ -17,7 +23,7 @@
   </thead>
   <tbody>
     <tr routerLink="/cars/details/{{car.id}}"
-    *ngFor="let car of cars">
+    *ngFor="let car of cars |carFilterPipe:filterText">
       <!-- <td>{{car.id}}</td> -->
       <td>{{car.name |uppercase}}</td>
       <td>{{car.brandName |uppercase}}</td>

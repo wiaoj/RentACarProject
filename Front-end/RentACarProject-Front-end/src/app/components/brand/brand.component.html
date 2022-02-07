@@ -1,7 +1,11 @@
-<ul class="list-group" style="text-align: center; font-weight: 400;">
-  <li (click)="clearCurrentBrand()" routerLink="" [class]="getAllBrandClass()">All Brands</li>
-  <li (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.id}}" *ngFor="let brand of brands"
-    [class]="getCurrentBrandClass(brand)">
-    {{brand.name}}
-  </li>
-</ul>
+<div class="input-group mb-3">
+  <input type="text" [(ngModel)]="filterText" class="form-control" placeholder="Search brand">
+  <button (click)="clearInputBox()" class="btn btn-info" type="button" id="button">X</button>
+</div>
+  <ul class="list-group" style="text-align: center; font-weight: 400;">
+    <li (click)="clearCurrentBrand()" routerLink="" [class]="getAllBrandClass()">All Brands</li>
+    <li (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.id}}" *ngFor="let brand of brands |brandFilterPipe:filterText"
+      [class]="getCurrentBrandClass(brand)">
+      {{brand.name}}
+    </li>
+  </ul>
