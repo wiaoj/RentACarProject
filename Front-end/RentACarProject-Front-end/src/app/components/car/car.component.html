@@ -16,15 +16,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr routerLink="cars/details/{{car.id}}"
+    <tr routerLink="/cars/details/{{car.id}}"
     *ngFor="let car of cars">
       <!-- <td>{{car.id}}</td> -->
-      <td>{{car.name}}</td>
-      <td>{{car.brandName}}</td>
-      <td>{{car.colorName}}</td>
+      <td>{{car.name |uppercase}}</td>
+      <td>{{car.brandName |uppercase}}</td>
+      <td>{{car.colorName |uppercase}}</td>
       <td>{{car.modelYear}}</td>
-      <td>${{car.dailyPrice}}</td>
-      <td>{{car.description}}</td>
+      <td>{{car.dailyPrice |currency}}</td>
+      <td>{{car.description |uppercase}}</td>
     </tr>
   </tbody>
 </table>

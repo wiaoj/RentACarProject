@@ -12,6 +12,8 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { CarRentalComponent } from './components/car-rental/car-rental.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,14 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule, // required animations module for toastr
+    ToastrModule.forRoot({
+      positionClass:"toast-top-right",
+      autoDismiss:true,
+      maxOpened:3,
+      progressBar:true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

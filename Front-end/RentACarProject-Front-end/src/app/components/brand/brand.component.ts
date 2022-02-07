@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { BrandService } from './../../services/brand/brand.service';
 import { Brand } from './../../models/brand/brand';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +12,7 @@ export class BrandComponent implements OnInit {
   brands: Brand[] = [];
   currentBrand: Brand;
   //dataLoaded = false;
-  constructor(private brandService: BrandService) {}
+  constructor(private brandService: BrandService, private toastr:ToastrService) {}
 
   ngOnInit(): void {
     this.getBrands();
@@ -26,6 +27,7 @@ export class BrandComponent implements OnInit {
 
   setCurrentBrand(brand: Brand) {
     this.currentBrand = brand;
+    this.toastr.success(this.currentBrand.name, this.currentBrand.id.toString());
   }
   clearCurrentBrand() {
     this.currentBrand = { id: 0, name: '' };
