@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { CarService } from './../../services/car/car.service';
 import { Car } from './../../models/car/car';
@@ -12,19 +13,22 @@ export class CarComponent implements OnInit {
   cars: Car[] = [];
   dataLoaded = false;
   carDetails = false;
-  filterText:string ="";
+  brandId: number = 0;
+  colorId: number = 0;
+  filterText: string = '';
   constructor(
     private carService: CarService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     //this.getCars();
     this.activatedRoute.params.subscribe((params) => {
       if (params['brandId']) {
-        this.getCarsByBrand(params['brandId']);
+        this.getCarsByBrandId(params['brandId']);
       } else if (params['colorId']) {
-        this.getCarsByColor(params['colorId']);
+        this.getCarsByColorId(params['colorId']);
       } else {
         this.getCarsDetails();
       }
@@ -44,14 +48,14 @@ export class CarComponent implements OnInit {
     });
   }
 
-  getCarsByBrand(brandId: number) {
-    this.carService.getCarsByBrand(brandId).subscribe((response) => {
+  getCarsByBrandId(brandId: number) {
+    this.carService.getCarsByBrandId(brandId).subscribe((response) => {
       this.cars = response.data;
       this.dataLoaded = true;
     });
   }
-  getCarsByColor(colorId: number) {
-    this.carService.getCarsByColor(colorId).subscribe((response) => {
+  getCarsByColorId(colorId: number) {
+    this.carService.getCarsByColorId(colorId).subscribe((response) => {
       this.cars = response.data;
       this.dataLoaded = true;
     });
@@ -63,8 +67,26 @@ export class CarComponent implements OnInit {
       this.dataLoaded = true;
     });
   }
+  getCarsByBrandIdAndColorId(brandId: number, colorId: number) {
+    this.carService
+      .getCarsByBrandIdAndColorId(brandId, colorId)
+      .subscribe((response) => {
+        this.cars = response.data;
+        this.dataLoaded = true;
+      });
+  }
 
-  clearInputBox(){
-    this.filterText = "";
+  filter() {
+    this.brandId == 0 && this.colorId == 0
+      ? this.ngOnInit()
+      : this.getCarsByBrandIdAndColorId(this.brandId, this.colorId);
+    this.toastr.info('Listed filtered cars', 'Listed');
+  }
+
+  clearInputBox() {
+    this.filterText = '';
+  }
+  hi() {
+    console.log('hiiii');
   }
 }

@@ -13,7 +13,7 @@ GetRental();
 static void GetCar() {
     CarManager carManager = new(new EfCarDal());
 
-    carManager.GetCarDetails().Data.ForEach(car => Console.WriteLine($"Car: {car.Name} Brand: {car.BrandName} Color: {car.ColorName} Price: ${car.DailyPrice} daily"));
+    carManager.GetCarsDetails().Data.ForEach(car => Console.WriteLine($"Car: {car.Name} Brand: {car.BrandName} Color: {car.ColorName} Price: ${car.DailyPrice} daily"));
 
 }
 

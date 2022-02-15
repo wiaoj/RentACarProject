@@ -6,7 +6,7 @@ namespace WebAPI.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class BrandsController : ControllerBase {
-        readonly IBrandService _brandService;
+        private readonly IBrandService _brandService;
         public BrandsController(IBrandService brandService) => _brandService = brandService;
 
         [HttpPost]//[HttpGet("add")]

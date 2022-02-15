@@ -1,7 +1,8 @@
-<div *ngFor="let carDetail of carDetails" id="carouselExampleInterval" class="carousel slide " data-bs-ride="carousel" style="text-align: center;">
+<p></p>
+<div  id="carouselExampleInterval" class="carousel slide " data-bs-ride="carousel" style="text-align: center;">
   <div class="carousel-inner">
-    <div *ngFor="let image of imagePaths; index as i; first as firstImage" [ngClass]="{active: firstImage}" class="carousel-item" data-bs-interval="2000">
-      <img [src]="showImageSrc(image.imagePath)" width="260" height="300" class="d-block w-100" alt="...">
+    <div *ngFor="let image of imagePaths; index as i; first as firstImage" [ngClass]="{active: firstImage}" class="carousel-item" data-bs-interval="3000">
+      <img [src]="showImageSrc(image.imagePath)" width="260" height="300" class="d-block w-100">
     </div>
   </div>
   <div *ngIf="showImageButton==true">
@@ -14,18 +15,58 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  <div class="card border-dark mb-3">
-  <div class="card-header">Car Name: {{carDetail.name}}</div>
+</div>
+  <div *ngFor="let carDetail of carDetails" class="card border-dark mb-3" style="text-align: center;">
+  <div  class="card-header">Car Name: {{carDetail.name}}</div>
   <div class="card-body">
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Brand: {{carDetail.brandName}}</li>
       <li class="list-group-item">Color: {{carDetail.colorName}}</li>
       <li class="list-group-item">Model Year: {{carDetail.modelYear}}</li>
+
+      <!-- <li *ngIf="carDetail.rentDate" class="list-group-item">Rent Date: {{carDetail.rentDate}}</li>
+      <li *ngIf="carDetail.returnDate" class="list-group-item">Return Date: {{carDetail.returnDate}}</li> -->
       <!-- ${{carDetail.dailyPrice}} per day -->
       <li class="list-group-item">{{carDetail.description}}</li>
     </ul>
   </div>
   <div class="card-footer text-success bg-transparent border-dark">
     {{carDetail.dailyPrice |currency}} per day
+    <button data-bs-target="#rentalModal" data-bs-toggle="modal" data-bs-dismiss="modal" type="button" class="btn btn-outline-success">Rent</button>
+  </div> <!-- class="btn btn-success disabled" -->
+</div>
+
+
+<div class="modal fade" id="rentalModal" data-bs-backdrop="static" aria-hidden="true" aria-labelledby="rentalModalLabel" data-bs-keyboard="false" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="rentalModalLabel">Rental</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-car-rental-add></app-car-rental-add>
+      </div>
+      <!-- <div class="modal-footer">
+        <button class="btn btn-success" data-bs-target="#paymentModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Next</button>
+      </div> -->
+    </div>
   </div>
 </div>
+
+<!-- <div class="modal fade" id="paymentModalToggle" aria-hidden="true" aria-labelledby="paymentModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="paymentModalToggleLabel">Modal 2</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-car-rental-payment></app-car-rental-payment>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-bs-target="#rentalModal" data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button>
+      </div>
+    </div>
+  </div>
+</div> -->

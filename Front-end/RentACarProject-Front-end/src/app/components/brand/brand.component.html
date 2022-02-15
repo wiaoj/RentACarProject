@@ -2,10 +2,13 @@
   <input type="text" [(ngModel)]="filterText" class="form-control" placeholder="Search brand">
   <button (click)="clearInputBox()" class="btn btn-info" type="button" id="button">X</button>
 </div>
-  <ul class="list-group" style="text-align: center; font-weight: 400;">
-    <li (click)="clearCurrentBrand()" routerLink="" [class]="getAllBrandClass()">All Brands</li>
-    <li (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.id}}" *ngFor="let brand of brands |brandFilterPipe:filterText"
-      [class]="getCurrentBrandClass(brand)">
+<div class="form-floating">
+  <select class="form-select" (change)="setCurrentBrand()" [(ngModel)]="brandId" aria-label="Floating label select example" style="text-align: center; font-weight: 400;">
+    <option value="0" routerLink="" [class]="getAllBrandClass()">All Brands</option>
+    <option value="{{brand.id}}" routerLink="/cars/brand/{{brand.id}}"
+      *ngFor="let brand of brands |brandFilterPipe:filterText" [class]="getCurrentBrandClass(brand)">
       {{brand.name}}
-    </li>
-  </ul>
+    </option>
+  </select>
+  <label for="floatingSelect">Select Brand</label>
+</div>

@@ -1,11 +1,15 @@
+<p></p>
 <div class="input-group mb-3">
   <input type="text" [(ngModel)]="filterText" class="form-control" placeholder="Search color">
   <button (click)="clearInputBox()" class="btn btn-dark" type="button" id="button">X</button>
 </div>
-<ul class="list-group" style="text-align: center; font-weight: 400;">
-  <li (click)="clearCurrentColor()" routerLink="" [class]="getAllColorClass()">All Colors</li>
-  <li (click)="setCurrentColor(color)" routerLink="/cars/color/{{color.id}}" *ngFor="let color of colors |colorFilterPipe:filterText"
-    [class]="getCurrentColorClass(color)">
-    {{color.name}}
-  </li>
-</ul>
+<div class="form-floating">
+  <select class="form-select" (change)="setCurrentColor()" [(ngModel)]="colorId" aria-label="Floating label select example" style="text-align: center; font-weight: 400;">
+    <option value="0" (click)="clearCurrentColor()" routerLink="" [class]="getAllColorClass()">All Colors</option>
+    <option value="{{color.id}}"  routerLink="/cars/color/{{color.id}}"
+      *ngFor="let color of colors |colorFilterPipe:filterText" [class]="getCurrentColorClass(color)">
+      {{color.name}}
+    </option>
+  </select>
+  <label for="floatingSelect">Select Color</label>
+</div>

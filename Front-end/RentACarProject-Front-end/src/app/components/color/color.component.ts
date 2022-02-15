@@ -1,3 +1,4 @@
+import { CarComponent } from './../car/car.component';
 import { ColorService } from './../../services/color/color.service';
 import { Color } from './../../models/color/color';
 import { Component, OnInit } from '@angular/core';
@@ -10,9 +11,13 @@ import { Component, OnInit } from '@angular/core';
 export class ColorComponent implements OnInit {
   colors: Color[] = [];
   currentColor: Color;
+  colorId: number = 0;
   filterText: string = '';
   //dataLoaded = false;
-  constructor(private colorService: ColorService) {}
+  constructor(
+    private colorService: ColorService,
+    private carComponent: CarComponent
+  ) {}
 
   ngOnInit(): void {
     this.getColors();
@@ -25,11 +30,13 @@ export class ColorComponent implements OnInit {
     });
   }
 
-  setCurrentColor(color: Color) {
-    this.currentColor = color;
+  setCurrentColor() {
+    this.carComponent.colorId = this.colorId;
   }
   clearCurrentColor() {
     this.currentColor = { id: 0, name: '' };
+    this.colorId = 0;
+    this.setCurrentColor();
   }
   getCurrentColorClass(color: Color) {
     if (color == this.currentColor) {

@@ -1,4 +1,3 @@
-import { CarImage } from './../carImage/carImage';
 export interface CarDetailsById {
   id: number;
   name: string;
@@ -6,6 +5,8 @@ export interface CarDetailsById {
   colorName: string;
   modelYear: number;
   dailyPrice: number;
+  rentDate: Date;
+  returnDate: Date;
   description: string;
   imagePaths: string[];
 }

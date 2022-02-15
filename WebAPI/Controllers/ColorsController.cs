@@ -6,7 +6,7 @@ namespace WebAPI.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class ColorsController : ControllerBase {
-        readonly IColorService _colorService;
+        private readonly IColorService _colorService;
         public ColorsController(IColorService colorService) => _colorService = colorService;
 
         [HttpPost]

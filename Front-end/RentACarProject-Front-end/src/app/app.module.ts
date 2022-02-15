@@ -1,4 +1,4 @@
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,6 +12,7 @@ import { ColorComponent } from './components/color/color.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { CarRentalComponent } from './components/car-rental/car-rental.component';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
+import { CarRentalAddComponent } from './components/car-rental-add/car-rental-add.component';
 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -30,13 +31,15 @@ import { CarFilterPipePipe } from './pipes/car/car-filter-pipe.pipe';
     CarDetailComponent,
     BrandFilterPipePipe,
     ColorFilterPipePipe,
-    CarFilterPipePipe
+    CarFilterPipePipe,
+    CarRentalAddComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule, // required animations module for toastr
     ToastrModule.forRoot({
       positionClass:"toast-top-right",

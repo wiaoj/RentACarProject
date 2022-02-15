@@ -17,7 +17,7 @@ namespace Business.Concrete {
         private readonly IRentalDal _rentalDal;
         public RentalManager(IRentalDal rentaldal) => _rentalDal = rentaldal;
 
-        [SecuredOperation("admin,rental.admin,rental.add")]
+        //[SecuredOperation("admin,rental.admin,rental.add")]
         [ValidationAspect(typeof(RentalValidator))]
         [CacheRemoveAspect("IRentalService.Get")]
         public IResult Add(Rental rental) {

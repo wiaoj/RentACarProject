@@ -11,13 +11,13 @@ import { CarDetailByIdService } from 'src/app/services/carDetail/car-detailById.
   styleUrls: ['./car-detail.component.css'],
 })
 export class CarDetailComponent implements OnInit {
-  imageUrl: string = "https://localhost:44388/uploads/images/"
-  carDetails: CarDetailsById[] = [];
-  imagePaths: CarImage[]=[]
-  showImageButton: boolean= false;
+  imageUrl: string = 'https://localhost:44388/uploads/images/';
+  carDetails: CarDetailsById[]=[];
+  imagePaths: CarImage[] = [];
+  showImageButton: boolean = false;
   constructor(
     private carDetailByIdService: CarDetailByIdService,
-    private carImageService:CarImageService,
+    private carImageService: CarImageService,
     private activatedRoute: ActivatedRoute
   ) {}
 
@@ -25,7 +25,7 @@ export class CarDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
         this.getCarDetails(params['carId']);
-        this.getImage(params["carId"]);
+        this.getImage(params['carId']);
       }
     });
   }
@@ -35,15 +35,15 @@ export class CarDetailComponent implements OnInit {
       this.carDetails = response.data;
     });
   }
-  getImage(carId:number) {
-    this.carImageService.getCarImagesByCarId(carId).subscribe(response=>{
+  getImage(carId: number) {
+    this.carImageService.getCarImagesByCarId(carId).subscribe((response) => {
       this.imagePaths = response.data;
-      if(this.imagePaths[1]){
+      if (this.imagePaths.length > 1) {
         this.showImageButton = true;
       }
     });
   }
-  showImageSrc(imagePath:string){
+  showImageSrc(imagePath: string) {
     return this.imageUrl + imagePath;
   }
 }

@@ -6,7 +6,7 @@ namespace WebAPI.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase {
-        readonly IUserService _userService;
+        private readonly IUserService _userService;
         public UsersController(IUserService userService) => _userService = userService;
 
         [HttpPost]
