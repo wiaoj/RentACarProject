@@ -38,7 +38,7 @@ import { CarFilterPipePipe } from './pipes/car/car-filter-pipe.pipe';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule, //[(ngModel)]
     ReactiveFormsModule,
     BrowserAnimationsModule, // required animations module for toastr
     ToastrModule.forRoot({
