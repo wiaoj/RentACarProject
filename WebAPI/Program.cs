@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Core.Utilities.IoC;
 using Core.Extensions.ServiceCollection;
 using Core.DependencyResolvers;
+using Core.Extensions.ExceptionMiddleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +52,8 @@ if (app.Environment.IsDevelopment()) {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.ConfigureCustomExceptionMiddleware();
 
 app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
 
