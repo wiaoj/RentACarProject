@@ -45,5 +45,11 @@ namespace WebAPI.Controllers {
             var result = _rentalService.GetRentalDetails();
             return result.Success ? Ok(result) : BadRequest(result);
         }
+
+        [HttpGet("checkifcarisavailable")]
+        public IActionResult CheckIfCarIsAvailable(int carId, DateTime rentDate, DateTime returnDate) {
+            var result = _rentalService.CheckIfCarIsAvailable(carId, rentDate, returnDate);
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
     }
 }

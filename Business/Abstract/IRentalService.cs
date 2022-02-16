@@ -10,6 +10,7 @@ namespace Business.Abstract {
         IDataResult<Rental> GetById(int id);
         IDataResult<List<Rental>> GetAll();
         IDataResult<List<CarRentalDetailDto>> GetRentalDetails();
+        IResult CheckIfCarIsAvailable(int carId, DateTime rentDate, DateTime returnDate);
         //IResult CheckRentalCar(Rental rental);
     }
 }

@@ -1,5 +1,5 @@
-﻿using Core.Utilities.Result.Abstract;
-using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Core.Utilities.Result.Abstract;
 
 namespace Business.Abstract {
     public interface ICreditCardService {
@@ -7,9 +7,9 @@ namespace Business.Abstract {
         IResult Delete(CreditCard creditCard);
         IResult Update(CreditCard creditCard);
 
-        IResult Payment(CreditCard creditCard);
+        IResult Payment(CreditCard creditCard, int carId);
 
-        IDataResult<CreditCard> GetById(int id);
-        IDataResult<List<CreditCard>> GetAll();
+        IDataResult<CreditCard> GetByCustomerId(int customerId);
+        //IDataResult<List<CreditCard>> GetAll();
     }
 }

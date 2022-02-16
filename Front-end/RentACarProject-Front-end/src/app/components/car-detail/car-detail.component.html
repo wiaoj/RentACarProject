@@ -32,7 +32,9 @@
   </div>
   <div class="card-footer text-success bg-transparent border-dark">
     {{carDetail.dailyPrice |currency}} per day
-    <button data-bs-target="#rentalModal" data-bs-toggle="modal" data-bs-dismiss="modal" type="button" class="btn btn-outline-success">Rent</button>
+    <app-car-rental-add></app-car-rental-add>
+    <!-- <button data-bs-target="#rentalModal" data-bs-toggle="modal" data-bs-dismiss="modal" type="button" class="btn btn-outline-success">
+      Rent</button> -->
   </div> <!-- class="btn btn-success disabled" -->
 </div>
 
@@ -45,7 +47,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <app-car-rental-add></app-car-rental-add>
+
       </div>
       <!-- <div class="modal-footer">
         <button class="btn btn-success" data-bs-target="#paymentModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Next</button>

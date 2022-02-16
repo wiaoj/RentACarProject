@@ -1,11 +1,10 @@
 ﻿using Business.Abstract;
-using Business.Aspects.Autofac;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspect.Autofac.Validation;
+using Core.Entities.Concrete;
 using Core.Utilities.Result.Abstract;
 using Core.Utilities.Result.Concrete.Success;
 using DataAccess.Abstract;
-using Entities.Concrete;
 
 namespace Business.Concrete {
     public class CreditCardManager : ICreditCardService {
@@ -25,16 +24,17 @@ namespace Business.Concrete {
             return new SuccessResult();
         }
 
-        public IDataResult<List<CreditCard>> GetAll() {
-            return new SuccessDataResult<List<CreditCard>>(_creditCardDal.GetAll());
+        //public IDataResult<List<CreditCard>> GetAll() {
+        //    return new SuccessDataResult<List<CreditCard>>(_creditCardDal.GetAll());
+        //}
+
+        public IDataResult<CreditCard> GetByCustomerId(int customerId) {
+            return new SuccessDataResult<CreditCard>(_creditCardDal.Get(c => c.CustomerId.Equals(customerId)));
         }
 
-        public IDataResult<CreditCard> GetById(int id) {
-            return new SuccessDataResult<CreditCard>(_creditCardDal.Get(c=>c.Id.Equals(id)));
-        }
-
-        public IResult Payment(CreditCard creditCard) {
-            return new SuccessResult("Ödeme başarıyla yapıldı");
+        public IResult Payment(CreditCard creditCard, int carId) {
+            Core.Utilities.Payment.Payment.Pay(creditCard);
+            return new SuccessResult("Ödeme başarılı");
         }
 
         [ValidationAspect(typeof(CreditCardValidation))]

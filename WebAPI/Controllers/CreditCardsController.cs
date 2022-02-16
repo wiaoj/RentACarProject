@@ -1,7 +1,6 @@
 ﻿using Business.Abstract;
-using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
+using Core.Entities.Concrete;
 
 namespace WebAPI.Controllers {
     [Route("api/[controller]")]
@@ -28,22 +27,22 @@ namespace WebAPI.Controllers {
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpGet]
-        public IActionResult GetAll() {
-            Thread.Sleep(1000);
-            var result = _creditCardService.GetAll();
-            return result.Success ? Ok(result) : BadRequest(result);
-        }
+        //[HttpGet]
+        //public IActionResult GetAll() {
+        //    Thread.Sleep(1000);
+        //    var result = _creditCardService.GetAll();
+        //    return result.Success ? Ok(result) : BadRequest(result);
+        //}
 
         [HttpPost("pay")]
-        public IActionResult GetPayment(CreditCard creditCard) {
-            var result = _creditCardService.Payment(creditCard);
+        public IActionResult GetPayment(CreditCard creditCard, int carId) {
+            var result = _creditCardService.Payment(creditCard, carId);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpGet("getbyid")]
-        public IActionResult GetById(int id) {
-            var result = _creditCardService.GetById(id);
+        [HttpGet("getbycustomerid")]
+        public IActionResult GetByCustomerId(int id) {
+            var result = _creditCardService.GetByCustomerId(id);
             return result.Success ? Ok(result) : BadRequest(result);
         }
     }

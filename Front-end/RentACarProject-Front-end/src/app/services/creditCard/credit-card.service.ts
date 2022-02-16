@@ -1,3 +1,4 @@
+import { ResponseModel } from './../../models/responseModel';
 import { CreditCard } from './../../models/creditCard/creditCard';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -12,21 +13,23 @@ export class CreditCardService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getCards(): Observable<ListResponseModel<CreditCard>> {
-    let newPath = this.apiUrl;
+  getCardByCustomerId(id: number): Observable<ListResponseModel<CreditCard>> {
+    let newPath = this.apiUrl + '/getbycustomerid?id=' + id;
     return this.httpClient.get<ListResponseModel<CreditCard>>(newPath);
   }
 
-  getCardById(id:number): Observable<ListResponseModel<CreditCard>> {
-    let newPath = this.apiUrl + "/getbyid?id=" + id;
-    return this.httpClient.get<ListResponseModel<CreditCard>>(newPath);
+  payment(
+    creditCard: CreditCard,
+    carId: number
+  ): Observable<ListResponseModel<CreditCard>> {
+    let newPath = this.apiUrl + '/pay?carId=' + carId;
+    return this.httpClient.post<ListResponseModel<CreditCard>>(
+      newPath,
+      creditCard
+    );
   }
-  payment(creditCard: CreditCard[]): Observable<ListResponseModel<CreditCard>> {
-    let newPath = this.apiUrl + '/pay';
-    return this.httpClient.post<ListResponseModel<CreditCard>>(newPath,creditCard);
-  }
-  saveCard(creditCard: CreditCard): Observable<CreditCard> {
+  saveCard(creditCard: CreditCard): Observable<ResponseModel> {
     let newPath = this.apiUrl;
-    return this.httpClient.post<CreditCard>(newPath, creditCard);
+    return this.httpClient.post<ResponseModel>(newPath, creditCard);
   }
 }

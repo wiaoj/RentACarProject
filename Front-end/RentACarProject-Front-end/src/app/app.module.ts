@@ -1,7 +1,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrandFilterPipePipe } from './pipes/brand/brand-filter-pipe.pipe';
 import { ColorFilterPipePipe } from './pipes/color/color-filter-pipe.pipe';
 import { CarFilterPipePipe } from './pipes/car/car-filter-pipe.pipe';
+import { CardNumberPipePipe } from './pipes/creditCard/card-number-pipe.pipe';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +35,7 @@ import { CarFilterPipePipe } from './pipes/car/car-filter-pipe.pipe';
     ColorFilterPipePipe,
     CarFilterPipePipe,
     CarRentalAddComponent,
+    CardNumberPipePipe,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,9 @@ import { CarFilterPipePipe } from './pipes/car/car-filter-pipe.pipe';
       progressBar:true
     })
   ],
-  providers: [],
+  providers: [
+    DatePipe,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

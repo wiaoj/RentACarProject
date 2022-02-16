@@ -2,6 +2,7 @@
 using Business.Aspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Castle.Core.Internal;
 using Core.Aspect.Autofac.Caching;
 using Core.Aspect.Autofac.Validation;
 using Core.Utilities.Result.Abstract;
@@ -47,6 +48,13 @@ namespace Business.Concrete {
         [CacheAspect]
         public IDataResult<List<CarRentalDetailDto>> GetRentalDetails() {
             return new SuccessDataResult<List<CarRentalDetailDto>>(_rentalDal.GetRentalDetails());
+        }
+
+        public IResult CheckIfCarIsAvailable(int carId, DateTime rentDate, DateTime returnDate) {
+            var result = _rentalDal.GetAll(r => r.CarId.Equals(carId) && r.ReturnDate >= rentDate);
+
+            return result.IsNullOrEmpty() ? new SuccessResult("This car is available") :
+                new ErrorResult($"This car is not available. It is going to be available in: { result[result.Count - 1].ReturnDate.Value.ToString("yyyy-MM-dd") }");
         }
 
         [SecuredOperation("admin,rental.admin,rental.update")]

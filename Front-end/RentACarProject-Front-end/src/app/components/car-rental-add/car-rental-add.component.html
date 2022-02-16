@@ -1,117 +1,149 @@
-<div *ngIf="paymentPage==false">
-  <div class="row">
-    <div class="col-md-5">
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Rent date</label>
-        <input (change)="setMinEndDate()" [(ngModel)]="startDate" type="date" class="form-control"
-          min="{{ minStartDate | date: 'yyyy-MM-dd' }}" />
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+  data-bs-target="#exampleModalToggle">
+  Rent The Car
+  <i class="bi-wallet" style="font-size: 1rem; color: rgb(50, 50, 50)"></i>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalToggle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Rent The Car</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="currentDate" class="form-label">
+          <h1 class="display-6">Rent from</h1>
+        </label>
+        <input type="date" [(ngModel)]="currentDate" class="form-control" id="currentDate"
+          placeholder="enter a search expression" />
+        <label for="returnDate" class="form-label">
+          <h1 class="display-6">Rent to</h1>
+        </label>
+        <input type="date" [(ngModel)]="returnDate" class="form-control" id="returnDate"
+          placeholder="enter a search expression" />
+      </div>
+      <div class="modal-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div *ngIf="isCarAvailable == false" class="alert alert-danger" role="alert">
+                {{ messageToDisplay }}
+              </div>
+              <div *ngIf="isCarAvailable == true" class="alert alert-info" role="alert">
+                {{ messageToDisplay }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-10">
+              <div class="btn-group float-start" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Close
+                </button>
+
+                <button (click)="checkIfCarIsAvailable(carId, currentDate, returnDate)" type="button"
+                  class="btn btn-warning">
+                  Check If Car Is Available
+                </button>
+              </div>
+            </div>
+            <div class="col-2">
+              <button [class]="getCurrentClassOfPayButton()" data-bs-target="#exampleModalToggle2"
+                data-bs-toggle="modal">
+                Pay
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-5">
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Return date</label>
-        <input (change)="calculateDiff()" [(ngModel)]="endDate" type="date" class="form-control"
-          min="{{ minEndDate | date: 'yyyy-MM-dd' }}" />
-      </div>
-    </div>
-  </div>
-  <div>
-    <div class="mt-4">
-      <p>Days to rent: {{ diff }} - Daily Price : {{dailyPrice |currency}}</p>
-      <p>Price : {{ money }}</p>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button (click)="goToPayment()" class="btn btn-success">Next</button>
   </div>
 </div>
 
-<div *ngIf="paymentPage==true">
-  <div class="mb-4">
-    <h2>Confirm order and pay</h2>
-    <span>please make the payment, after that you can enjoy all the features and
-      benefits.</span>
-  </div>
-  <div class="row" [formGroup]="creditCardForm">
-    <div class="col-md-8">
-      <div class="card p-3" *ngIf="!checkBox">
-        <h6 class="text-uppercase">Payment details</h6>
-        <div class="inputbox mt-3"> <input type="text" name="name" class="form-control" formControlName="nameOnTheCard"
-            required="required"> <span>Name on card</span> </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="inputbox mt-3 mr-2"> <input type="text" name="name" class="form-control"
-                formControlName="cardNumber" required="required"> <i class="fa fa-credit-card"></i> <span>Card
-                Number</span> </div>
-          </div>
-          <div class="col-md-6">
-            <div class="d-flex flex-row">
-              <div class="inputbox mt-3 mr-2"> <input type="number" name="name" class="form-control"
-                  formControlName="expirationDate" required="required"> <span>Expiry Mounth</span> </div>
-              <div class="inputbox mt-3 mr-2"> <input type="number" name="name" class="form-control"
-                  formControlName="expirationDate" required="required"> <span>Expiry Year</span> </div>
-              <div class="inputbox mt-3 mr-2"> <input type="number" name="name" class="form-control"
-                  formControlName="cvv" required="required"> <span>CVV</span> </div>
-            </div>
+<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+  tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel2">
+          Payment Informations
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="hasSavedCard" class="row" style="margin-bottom: 6px;">
+          <div class="col-6">
+            <label for="card" class="form-label">Saved Cards</label>
+            <select [(ngModel)]="cardFromDropdown" class="form-select" id="card">
+              <option [ngValue]="card" *ngFor="let card of creditCards">{{card.cardNumber | cardNumberPipe}}</option>
+            </select>
           </div>
         </div>
-      </div>
-      <div class="row" *ngIf="isCardExist">
-        <div *ngFor="let card of creditCards" class="col-md-4">
-          <div class="payment-card">
-            <div class="form-check">
-              <input class="form-check-input ml-auto mr-3" (change)="checkBoxTicked($event)" type="checkbox"
-                name="check" value="">
+        <form *ngIf="hasSavedCard == false" [formGroup]="paymentForm">
+          <div>
+            <div class="row">
+              <div class="col-8">
+                <label for="cardNumber" class="form-label">Credit Card Number</label>
+                <input id="cardNumber" type="text" class="form-control" placeholder="Enter the card number"
+                  formControlName="cardNumber">
+              </div>
+              <div class="col-4">
+                <label for="cvv" class="form-label">CVV</label>
+                <input id="cvv" type="text" class="form-control" placeholder="Enter the CVV" formControlName="cvv">
+              </div>
             </div>
-
-            <i class="fa fa-cc-visa payment-icon-big text-success"></i>
-            <h2>
-              {{card.cardNumber}}
-            </h2>
 
             <div class="row">
-              <div class="col-sm-6">
-                <small>
-                  <strong>Expiry date:</strong> {{card.expirationMounth}}
-                </small>
+              <div class="col-6">
+                <label for="nameOnCard" class="form-label">Name On Card</label>
+                <input id="nameOnCard" type="text" class="form-control" placeholder="Enter the full name"
+                  formControlName="nameOnCard">
               </div>
-              <div class="col-sm-6 text-right">
-                <small>
-                  <strong>Name:</strong> {{card.fullName}}
-                </small>
+              <div class="col-3">
+                <label for="expirationMonth" class="form-label">Month</label>
+                <select id="expirationMonth" formControlName="expirationMonth" class="form-select">
+                  <option *ngFor="let month of months">{{month}}</option>
+                </select>
+              </div>
+              <div class="col-3">
+                <label for="expirationYear" class="form-label">Year</label>
+                <select id="expirationYear" formControlName="expirationYear" class="form-select">
+                  <option *ngFor="let year of years">{{year}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div *ngIf="hasSavedCard == false" class="form-check float-start">
+                <input [(ngModel)]="isSaveCardChecked" class="form-check-input" type="checkbox" value="true"
+                  id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Save the card
+                </label>
+              </div>
+              <div *ngIf="hasSavedCard">
+                <button (click)="setHasSavedCardFalse()" class="btn btn-secondary">New card</button>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="btn-group float-end" role="group" aria-label="Basic example">
+                <button class="btn btn-secondary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+                  Back
+                </button>
+                <button (click)="pay()" class="btn btn-primary" data-bs-dismiss="modal">Complete
+                  Payment</button>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <ng-template #content let-c="close" let-d="dismiss">
-        <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
-          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Kredi Kartı numarası kaydedilsin mi?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" (click)="saveCreditCard()">Kaydet ve Öde</button>
-          <button type="button" class="btn btn-outline-dark" (click)="rentCar()">Kaydetmeden Öde</button>
-        </div>
-      </ng-template>
-      <div class="mt-4 mb-4 d-flex justify-content-between">
-        <button (click)="goToBack()" class="btn btn-success px-3" >Previous step</button>
-        <button (click)="rentCar()" class="btn btn-success px-3">Pay {{money | currency}}</button>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card card-blue p-3 text-dark mb-3"> <span>You have to pay</span>
-        <div class="d-flex flex-row align-items-end mb-3">
-          <h1 class="mb-0 yellow"> {{money | currency}}</h1>
-        </div> <span>Enjoy all the features and perk after you complete the payment</span> <a
-          class="yellow decoration">Know all the features</a>
-        <div class="hightlight"> <span>100% Guaranteed support and update for the next 5 years.</span> </div>
       </div>
     </div>
   </div>

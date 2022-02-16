@@ -1,6 +1,6 @@
 ﻿using Core.Entities.Abstract;
 
-namespace Entities.Concrete {
+namespace Core.Entities.Concrete {
     public class CreditCard : IEntity {
         public int Id { get; set; }
         public int CustomerId { get; set; }

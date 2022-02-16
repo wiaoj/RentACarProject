@@ -3,7 +3,7 @@ export interface CreditCard {
   customerId: number;
   fullName: string;
   cardNumber:string;
-  expirationMounth: number;
+  expirationMonth: number;
   expirationYear:number;
   cvv:number;
 
