@@ -1,3 +1,4 @@
+import { ResponseModel } from './../../models/responseModel';
 import { ListResponseModel } from './../../models/listResponseModel';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -36,5 +37,9 @@ export class CarService {
   getCarsByBrandIdAndColorId(brandId: number, colorId: number): Observable<ListResponseModel<Car>> {
     let newPath = this.apiUrl + '/getcardetailsbybrandidandcolorid?brandid=' + brandId + '&colorid=' + colorId;
     return this.httpClient.get<ListResponseModel<Car>>(newPath);
+  }
+
+  add(car: Car):Observable<ResponseModel> {
+    return this.httpClient.post<ResponseModel>(this.apiUrl, car);
   }
 }

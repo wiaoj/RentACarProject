@@ -21,6 +21,9 @@ import { ColorFilterPipePipe } from './pipes/color/color-filter-pipe.pipe';
 import { CarFilterPipePipe } from './pipes/car/car-filter-pipe.pipe';
 import { CardNumberPipePipe } from './pipes/creditCard/card-number-pipe.pipe';
 import { DatePipe } from '@angular/common';
+import { BrandAddComponent } from './components/brand-add/brand-add.component';
+import { ColorAddComponent } from './components/color-add/color-add.component';
+import { CarAddComponent } from './components/car-add/car-add.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +39,9 @@ import { DatePipe } from '@angular/common';
     CarFilterPipePipe,
     CarRentalAddComponent,
     CardNumberPipePipe,
+    BrandAddComponent,
+    ColorAddComponent,
+    CarAddComponent,
   ],
   imports: [
     BrowserModule,

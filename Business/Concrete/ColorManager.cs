@@ -14,7 +14,7 @@ namespace Business.Concrete {
         private readonly IColorDal _colorDal;
         public ColorManager(IColorDal colorDal) => _colorDal = colorDal;
 
-        [SecuredOperation("admin,color.admin,color.add")]
+        //[SecuredOperation("admin,color.admin,color.add")]
         [ValidationAspect(typeof(ColorValidator))]
         [CacheRemoveAspect("IColorService.Get")]
         public IResult Add(Color color) {
