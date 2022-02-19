@@ -17,6 +17,12 @@ export class ColorService {
   }
 
   add(color: Color):Observable<ResponseModel> {
-    return this.httpClient.post<ResponseModel>(this.apiUrl, color);
+    let newPath = `${this.apiUrl}/add`;
+    return this.httpClient.post<ResponseModel>(newPath, color);
+  }
+
+  update(color:Color):Observable<ResponseModel>{
+    let newPath = `${this.apiUrl}/update`;
+    return this.httpClient.post<ResponseModel>(newPath, color);
   }
 }

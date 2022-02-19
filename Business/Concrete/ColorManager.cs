@@ -39,7 +39,7 @@ namespace Business.Concrete {
             return new SuccessDataResult<Color>(_colorDal.Get(c => c.Id.Equals(id)));
         }
 
-        [SecuredOperation("admin,color.admin,color.update")]
+        //[SecuredOperation("admin,color.admin,color.update")]
         [ValidationAspect(typeof(ColorValidator))]
         [CacheRemoveAspect("IColorService.Get")]
         public IResult Update(Color color) {

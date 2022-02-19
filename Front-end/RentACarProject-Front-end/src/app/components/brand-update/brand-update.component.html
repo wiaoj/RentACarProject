@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-3">
+    <div class="d-flex justify-content-center">
+      <div *ngIf="dataLoaded==false" class="spinner-grow text-info" style="width: 5rem; height: 5rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <table *ngIf="dataLoaded==true" class="table table-primary table-hover" style="text-align: center;">
+      <thead>
+        <tr>
+          <!-- <th scope="col">Id</th> -->
+          <th scope="col">Select brand</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let brand of brands">
+          <!-- <td>{{brand.id}}</td> -->
+          <td (click)="selectBrand(brand)">{{brand.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Update brand</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="brandUpdateForm">
+            <div *ngIf="selectedBrand" class="mb-3">
+              <label for="name">Brand name</label>
+              <div class="form-group">
+                <input type="text" id="name" formControlName="name" class="form-control"
+                  placeholder="Brand name"/>
+              </div>
+            </div>
+            <div *ngIf="selectedBrand == false" class="mb-3"><label for="name">Select brand</label></div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button *ngIf="selectedBrand" class="btn btn-fill btn-warning" (click)="update()" >Update</button>
+        </div>
+      </div>
+    </div>
+</div>

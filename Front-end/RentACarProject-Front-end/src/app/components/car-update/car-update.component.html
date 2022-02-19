@@ -1,0 +1,64 @@
+<div class="content">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="title">Update car</h5>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="carUpdateForm">
+          <div class="row">
+            <div class="mb-3">
+              <label for="name">Car name</label>
+              <div class="form-group">
+                <input type="text" id="name" formControlName="name" class="form-control" placeholder="Car name" />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3">
+                <label for="brandId" class="form-label">Select Brand</label>
+                <select id="brandId" class="form-select" formControlName="brandId">
+                  <option *ngFor="let brand of brands" [ngValue]="brand.id">
+                    {{ brand.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3">
+                <label for="colorId" class="form-label">Select Colour</label>
+                <select id="colurId" formControlName="colorId" class="form-select">
+                  <option *ngFor="let color of colors" [ngValue]="color.id">{{color.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-3">
+                <label for="modelYear" class="form-label">Model Year</label>
+                <input id="modelYear" type="number" class="form-control" placeholder="Enter model year"
+                  formControlName="modelYear" />
+              </div>
+            </div>
+            <div class="col-6">
+              <label for="dailyPrice" class="form-label">Daily Price</label>
+              <div class="input-group md-3">
+                <span class="input-group-text">$</span>
+                <input id="dailyPrice" type="number" class="form-control" placeholder="Enter daily price"
+                  formControlName="dailyPrice" />
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" type="text" class="form-control" placeholder="Enter a description"
+              formControlName="description" rows="3"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-fill btn-warning" (click)="update()">Update car</button>
+      </div>
+    </div>
+  </div>
+</div>

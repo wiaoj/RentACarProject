@@ -9,19 +9,19 @@ namespace WebAPI.Controllers {
         private readonly IUserService _userService;
         public UsersController(IUserService userService) => _userService = userService;
 
-        [HttpPost]
+        [HttpPost("add")]
         public IActionResult Add(User user) {
             var result = _userService.Add(user);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpPut]
+        [HttpPost("update")]
         public IActionResult Update(User user) {
             var result = _userService.Update(user);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpDelete]
+        [HttpPost("delete")]
         public IActionResult Delete(User user) {
             var result = _userService.Delete(user);
             return result.Success ? Ok(result) : BadRequest(result);

@@ -9,19 +9,19 @@ namespace WebAPI.Controllers {
         private readonly IColorService _colorService;
         public ColorsController(IColorService colorService) => _colorService = colorService;
 
-        [HttpPost]
+           [HttpPost("add")]
         public IActionResult Add(Color color) {
             var result = _colorService.Add(color);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpPut]
+        [HttpPost("update")]
         public IActionResult Update(Color color) {
             var result = _colorService.Update(color);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpDelete]
+        [HttpPost("delete")]
         public IActionResult Delete(Color color) {
             var result = _colorService.Delete(color);
             return result.Success ? Ok(result) : BadRequest(result);

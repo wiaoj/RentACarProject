@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-3">
+    <div class="d-flex justify-content-center">
+      <div *ngIf="dataLoaded==false" class="spinner-grow text-info" style="width: 5rem; height: 5rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <table *ngIf="dataLoaded==true" class="table table-primary table-hover" style="text-align: center;">
+      <thead>
+        <tr>
+          <!-- <th scope="col">Id</th> -->
+          <th scope="col">Select color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let color of colors">
+          <td (click)="selectColor(color)">{{color.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    <div class="col-md-9">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Update color</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="colorUpdateForm">
+            <div *ngIf="selectedColor" class="mb-3">
+              <label for="name">Color name</label>
+              <div class="form-group">
+                <input type="text" id="name" formControlName="name" class="form-control"
+                  placeholder="color name"/>
+              </div>
+            </div>
+            <div *ngIf="selectedColor == false" class="mb-3"><label for="name">Select color</label></div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button *ngIf="selectedColor" class="btn btn-fill btn-warning" (click)="update()" >Update</button>
+        </div>
+      </div>
+    </div>
+</div>

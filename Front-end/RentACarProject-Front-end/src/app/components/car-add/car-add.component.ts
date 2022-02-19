@@ -14,8 +14,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarAddComponent implements OnInit {
   carAddForm: FormGroup;
-brands:Brand[];
-colors:Color[];
+  brands:Brand[];
+  colors:Color[];
 
   constructor(
     private formbuilder: FormBuilder,
@@ -52,7 +52,6 @@ colors:Color[];
       this.colors = response.data;
     })
   }
-
 
   add(){
     if (this.carAddForm.valid) {

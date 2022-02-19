@@ -16,8 +16,7 @@ export class CustomerService {
   }
 
   getCustomersDetails(): Observable<ListResponseModel<Customer>> {
-    return this.httpClient.get<ListResponseModel<Customer>>(
-      this.apiUrl + '/customerdetails'
-    );
+    let newPath = `${this.apiUrl}/customerdetails`;
+    return this.httpClient.get<ListResponseModel<Customer>>(newPath);
   }
 }

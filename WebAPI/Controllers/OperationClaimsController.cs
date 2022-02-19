@@ -9,19 +9,19 @@ namespace WebAPI.Controllers {
         private readonly IOperationClaimService _operationClaimService;
         public OperationClaimsController(IOperationClaimService operationClaimService) => _operationClaimService = operationClaimService;
 
-        [HttpPost] //[HttpPost("add")]
+        [HttpPost("add")]//[HttpPost("add")]
         public IActionResult Add(OperationClaim operationClaim) {
             var result = _operationClaimService.Add(operationClaim);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpDelete] //[HttpPost("delete")]
+        [HttpPost("update")]//[HttpPost("delete")]
         public IActionResult Delete(OperationClaim operationClaim) {
             var result = _operationClaimService.Delete(operationClaim);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpPut] //[HttpPost("update")]
+        [HttpPost("delete")]//[HttpPost("update")]
         public IActionResult Update(OperationClaim operationClaim) {
             var result = _operationClaimService.Update(operationClaim);
             return result.Success ? Ok(result) : BadRequest(result);

@@ -9,19 +9,19 @@ namespace WebAPI.Controllers {
         private readonly ICarService _carService;
         public CarsController(ICarService carService) => _carService = carService;
 
-        [HttpPost]//[HttpPost("add")]
+        [HttpPost("add")]//[HttpPost("add")]
         public IActionResult Add(Car car) {
             var result = _carService.Add(car);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpPut]//[HttpPost("update")]
+        [HttpPost("update")]//[HttpPost("update")]
         public IActionResult Update(Car car) {
             var result = _carService.Update(car);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpDelete]//[HttpPost("delete")]
+        [HttpPost("delete")]//[HttpPost("delete")]
         public IActionResult Delete(Car car) {
             var result = _carService.Delete(car);
             return result.Success ? Ok(result) : BadRequest(result);
@@ -66,7 +66,7 @@ namespace WebAPI.Controllers {
 
 
         [HttpGet("getcardetailsbybrandidandcolorid")]
-        public IActionResult GetCarDetailsByBrandIdAndColorId(int brandId,int colorId) {
+        public IActionResult GetCarDetailsByBrandIdAndColorId(int brandId, int colorId) {
             var result = _carService.GetCarDetailsByBrandIdAndColorId(brandId, colorId);
             return result.Success ? Ok(result) : BadRequest(result);
         }

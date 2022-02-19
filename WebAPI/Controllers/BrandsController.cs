@@ -9,19 +9,19 @@ namespace WebAPI.Controllers {
         private readonly IBrandService _brandService;
         public BrandsController(IBrandService brandService) => _brandService = brandService;
 
-        [HttpPost]//[HttpGet("add")]
+        [HttpPost("add")]//[HttpGet("add")]
         public IActionResult Add(Brand brand) {
             var result = _brandService.Add(brand);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpPut]//[HttpGet("update")]
+        [HttpPost("update")]//[HttpGet("update")]
         public IActionResult Update(Brand brand) {
             var result = _brandService.Update(brand);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpDelete]//[HttpGet("delete")]
+        [HttpPost("delete")]//[HttpGet("delete")]
         public IActionResult Delete(Brand brand) {
             var result = _brandService.Delete(brand);
             return result.Success ? Ok(result) : BadRequest(result);

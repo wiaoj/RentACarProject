@@ -9,19 +9,19 @@ namespace WebAPI.Controllers {
         private readonly ICustomerService _customerService;
         public CustomersController(ICustomerService customerService) => _customerService = customerService;
 
-        [HttpPost]
+        [HttpPost("add")]
         public IActionResult Add(Customer customer) {
             var result = _customerService.Add(customer);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpPut]
+        [HttpPost("update")]
         public IActionResult Update(Customer customer) { 
             var result = _customerService.Update(customer);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpDelete]
+        [HttpPost("delete")]
         public IActionResult Delete(Customer customer) { 
             var result = _customerService.Delete(customer);
             return result.Success ? Ok(result) : BadRequest(result);

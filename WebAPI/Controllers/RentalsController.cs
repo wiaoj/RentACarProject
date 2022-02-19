@@ -9,19 +9,19 @@ namespace WebAPI.Controllers {
         private readonly IRentalService _rentalService;
         public RentalsController(IRentalService rentalService) => _rentalService = rentalService;
 
-        [HttpPost]
+        [HttpPost("add")]
         public IActionResult Add(Rental rental) {
             var result = _rentalService.Add(rental);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpPut]
+        [HttpPost("update")]
         public IActionResult Update(Rental rental) {
             var result = _rentalService.Update(rental);
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpDelete]
+        [HttpPost("delete")]
         public IActionResult Delete(Rental rental) {
             var result = _rentalService.Delete(rental);
             return result.Success ? Ok(result) : BadRequest(result);

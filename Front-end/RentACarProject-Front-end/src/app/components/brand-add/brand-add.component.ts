@@ -9,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./brand-add.component.css'],
 })
 export class BrandAddComponent implements OnInit {
-
   brandAddForm: FormGroup;
 
   constructor(
@@ -37,7 +36,9 @@ export class BrandAddComponent implements OnInit {
         (responseError) => {
           if (responseError.error.ValidationErrors.length > 0) {
             for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
-              this.toastr.error(responseError.error.ValidationErrors[i].ErrorMessage);
+              this.toastr.error(
+                responseError.error.ValidationErrors[i].ErrorMessage
+              );
             }
           }
         }

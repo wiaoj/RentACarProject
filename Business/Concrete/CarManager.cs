@@ -65,7 +65,7 @@ namespace Business.Concrete {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarsDetailsByColorId(colorId));
         }
 
-        [SecuredOperation("admin,car.admin,car.update")]
+        //[SecuredOperation("admin,car.admin,car.update")]
         [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car) {
