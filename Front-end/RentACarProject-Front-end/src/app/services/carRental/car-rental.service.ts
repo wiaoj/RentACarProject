@@ -18,7 +18,8 @@ export class CarRentalService {
   }
 
   addCarRental(rental: any): Observable<ResponseModel> {
-    return this.httpClient.post<ResponseModel>(this.apiUrl, rental);
+    let newPAth = `${this.apiUrl}/add`;
+    return this.httpClient.post<ResponseModel>(newPAth, rental);
   }
 
   checkIfCarIsAvailable(

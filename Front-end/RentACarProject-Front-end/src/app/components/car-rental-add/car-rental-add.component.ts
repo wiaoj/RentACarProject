@@ -80,26 +80,25 @@ export class CarRentalAddComponent implements OnInit {
 
   createPaymentForm() {
     this.paymentForm = this.formBuilder.group({
+      fullName: ['', Validators.required],
       cardNumber: ['', Validators.required],
-      nameOnCard: ['', Validators.required],
-      cvv: ['', Validators.required],
       expirationMonth: ['01', Validators.required],
       expirationYear: ['2022', Validators.required],
+      cvv: ['', Validators.required],
     });
   }
 
   saveCreditCard() {
     let card = {
+      customerId: 2,
+      fullName: this.paymentForm.value.fullName,
       cardNumber: this.paymentForm.value.cardNumber,
       expirationYear: this.paymentForm.value.expirationYear, // + "-" + this.paymentForm.value.expirationMonth + "-" + "01"
       expirationMonth: this.paymentForm.value.expirationMonth,
       cvv: this.paymentForm.value.cvv,
-      nameOnCard: this.paymentForm.value.nameOnCard,
-      customerId: 2,
     };
 
     let cardToAdd = Object.assign(card);
-    console.log(card.expirationYear);
     this.creditCardService.saveCard(cardToAdd).subscribe((response) => {
       if (response.success) {
         this.toastr.success('Card saved successfully.');
@@ -130,7 +129,6 @@ export class CarRentalAddComponent implements OnInit {
         expirationMonth: this.cardFromDropdown.expirationMonth, //.split('-')[1]
         expirationYear: this.cardFromDropdown.expirationYear, //.split('-')[0]
       };
-      console.log(this.cardFromDropdown.cardNumber);
     }
     if (this.isSaveCardChecked != true) {
       if (this.paymentForm.valid || this.hasSavedCard) {
@@ -167,7 +165,7 @@ export class CarRentalAddComponent implements OnInit {
   }
 
   checkIfCarIsAvailable(carId: number, rentDate: string, returnDate: string) {
-    if (rentDate < returnDate) {
+    if (rentDate <= returnDate) {
       this.carRentalService
         .checkIfCarIsAvailable(carId, rentDate, returnDate)
         .subscribe(
@@ -176,8 +174,9 @@ export class CarRentalAddComponent implements OnInit {
             this.messageToDisplay = response.message;
             this.toastr.success(response.message);
           },
-          (errorResponse) => {
-            this.toastr.error(errorResponse.message);
+          (responseError) => {
+            this.toastr.error(responseError.error.message);
+            console.log(responseError.error.message);
           }
         );
     } else {
@@ -219,8 +218,9 @@ export class CarRentalAddComponent implements OnInit {
           this.toastr.error('An error occured! Try later.');
         }
       },
-      (errorResponse) => {
-        this.toastr.error(errorResponse.error.message);
+      (responseError) => {
+        this.toastr.error(responseError.error.message);
+        console.log(responseError.error.message);
       }
     );
   }

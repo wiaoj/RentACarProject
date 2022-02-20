@@ -53,7 +53,8 @@ namespace Business.Concrete {
         public IResult CheckIfCarIsAvailable(int carId, DateTime rentDate, DateTime returnDate) {
             var result = _rentalDal.GetAll(r => r.CarId.Equals(carId) && r.ReturnDate >= rentDate);
 
-            return result.IsNullOrEmpty() ? new SuccessResult("This car is available") :
+            return result.IsNullOrEmpty() ? 
+                new SuccessResult("This car is available") :
                 new ErrorResult($"This car is not available. It is going to be available in: { result[result.Count - 1].ReturnDate.Value.ToString("yyyy-MM-dd") }");
         }
 

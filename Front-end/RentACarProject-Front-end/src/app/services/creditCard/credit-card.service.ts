@@ -18,12 +18,9 @@ export class CreditCardService {
     return this.httpClient.get<ListResponseModel<CreditCard>>(newPath);
   }
 
-  payment(
-    creditCard: CreditCard,
-    carId: number
-  ): Observable<ListResponseModel<CreditCard>> {
-    let newPath = this.apiUrl + '/pay?carId=' + carId;
-    return this.httpClient.post<ListResponseModel<CreditCard>>(
+  payment(creditCard: CreditCard, carId: number): Observable<ResponseModel> {
+    let newPath = `${this.apiUrl}/pay?carid=${carId}`;
+    return this.httpClient.post<ResponseModel>(
       newPath,
       creditCard
     );

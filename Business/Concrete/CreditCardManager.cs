@@ -29,12 +29,14 @@ namespace Business.Concrete {
         //}
 
         public IDataResult<CreditCard> GetByCustomerId(int customerId) {
+            //birden fazla kredi kartı varsa onun için entityFramework içinde metotd yazılmalı
             return new SuccessDataResult<CreditCard>(_creditCardDal.Get(c => c.CustomerId.Equals(customerId)));
         }
 
         public IResult Payment(CreditCard creditCard, int carId) {
-            Core.Utilities.Payment.Payment.Pay(creditCard);
-            return new SuccessResult("Ödeme başarılı");
+            //Core.Utilities.Payment.Payment.Pay(creditCard);
+            //return new SuccessResult("Ödeme başarılı");
+            return Core.Utilities.Payment.Payment.Pay(creditCard);
         }
 
         [ValidationAspect(typeof(CreditCardValidation))]

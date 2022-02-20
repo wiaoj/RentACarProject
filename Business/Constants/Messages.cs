@@ -53,5 +53,7 @@ namespace Business.Constants {
         
         
         internal static String AuthorizationDenied = "Bu işlem için yetkiniz bulunmamaktadır";
+
+        internal static String InvalidCreditCard = "Kredi kartınız geçersiz";
     }
 }

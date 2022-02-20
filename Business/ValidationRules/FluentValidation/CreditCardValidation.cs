@@ -1,4 +1,5 @@
-﻿using Core.Entities.Concrete;
+﻿using Business.Constants;
+using Core.Entities.Concrete;
 using FluentValidation;
 
 namespace Business.ValidationRules.FluentValidation {
@@ -7,8 +8,10 @@ namespace Business.ValidationRules.FluentValidation {
             RuleFor(c => c.CustomerId).NotEmpty();
             RuleFor(c => c.FullName).NotEmpty();
             RuleFor(c => c.CardNumber).NotEmpty();
-            RuleFor(c => c.ExpirationMounth).NotEmpty();
+            RuleFor(c => c.ExpirationMonth).NotEmpty();
+            RuleFor(c => c.ExpirationMonth).GreaterThanOrEqualTo(DateTime.Now.Month).WithMessage(Messages.InvalidCreditCard);
             RuleFor(c => c.ExpirationYear).NotEmpty();
+            RuleFor(c => c.ExpirationYear).GreaterThanOrEqualTo(DateTime.Now.Year).WithMessage(Messages.InvalidCreditCard);
             RuleFor(c => c.Cvv).NotEmpty();
         }
     }
