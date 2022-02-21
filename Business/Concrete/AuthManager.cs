@@ -20,7 +20,7 @@ namespace Business.Concrete {
         public IDataResult<AccessToken> CreateAccessToken(User user) {
             var claims = _userService.GetClaims(user);
             var accessToken = _tokenHelper.CreateToken(user, claims.Data);
-            return new SuccessDataResult<AccessToken>(accessToken, "Token oluşturuldu" /*Messages.AccessTokenCreated)*/);
+            return new SuccessDataResult<AccessToken>(accessToken, "Giriş başarılı" /*Messages.AccessTokenCreated)*/);
         }
 
         public IDataResult<User> Login(UserForLoginDto userForLoginDto) {

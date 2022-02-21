@@ -1,3 +1,6 @@
+import { RegisterComponent } from './components/auth/register/register.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { LoginGuard } from './guards/login.guard';
 import { CarUpdateComponent } from './components/car-update/car-update.component';
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 import { BrandUpdateComponent } from './components/brand-update/brand-update.component';
@@ -18,13 +21,16 @@ const routes: Routes = [
   { path: 'cars/details/:carId', component: CarDetailComponent },
   { path: 'cars/rental/add/:carId', component: CarRentalAddComponent },
 
-  { path: 'brands/add', component: BrandAddComponent },
-  { path: 'colors/add', component: ColorAddComponent },
-  { path: 'cars/add', component: CarAddComponent },
+  { path: 'brands/add', component: BrandAddComponent, canActivate:[LoginGuard] },
+  { path: 'colors/add', component: ColorAddComponent, canActivate:[LoginGuard] },
+  { path: 'cars/add', component: CarAddComponent, canActivate:[LoginGuard] },
 
-  { path: 'brands/update', component: BrandUpdateComponent },
-  { path: 'colors/update', component: ColorUpdateComponent},
-  { path: 'cars/update/:carId', component: CarUpdateComponent },
+  { path: 'brands/update', component: BrandUpdateComponent, canActivate:[LoginGuard] },
+  { path: 'colors/update', component: ColorUpdateComponent, canActivate:[LoginGuard] },
+  { path: 'cars/update/:carId', component: CarUpdateComponent, canActivate:[LoginGuard] },
+
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({

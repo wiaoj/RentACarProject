@@ -12,12 +12,12 @@ namespace WebAPI.Controllers {
         [HttpPost("login")]
         public ActionResult Login(UserForLoginDto userForLoginDto) {
             var userToLogin = _authService.Login(userForLoginDto);
-            if (!userToLogin.Success) {
+            if (userToLogin.Success.Equals(false)) {
                 return BadRequest(userToLogin.Message);
             }
 
             var result = _authService.CreateAccessToken(userToLogin.Data);
-            return result.Success ? Ok(result.Data) : BadRequest(result.Message);
+            return result.Success ? Ok(result) : BadRequest(result);
         }
 
         [HttpPost("register")]
@@ -29,7 +29,7 @@ namespace WebAPI.Controllers {
 
             var registerResult = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
             var result = _authService.CreateAccessToken(registerResult.Data);
-            return result.Success ? Ok(result.Data) : BadRequest(result.Message);
+            return result.Success ? Ok(result) : BadRequest(result);
         }
     }
 }

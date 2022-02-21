@@ -11,11 +11,9 @@ using DataAccess.Abstract;
 namespace Business.Concrete {
     public class UserManager : IUserService {
         private readonly IUserDal _userDal;
-        public UserManager(IUserDal userDal) {
-            _userDal = userDal;
-        }
+        public UserManager(IUserDal userDal) => _userDal = userDal;
 
-        [SecuredOperation("admin,user.admin,user.add")]
+        //[SecuredOperation("admin,user.admin,user.add")]
         [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user) {
             _userDal.Add(user);

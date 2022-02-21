@@ -1,3 +1,4 @@
+import { AuthInterceptor } from './interceptors/auth/auth.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,6 +28,9 @@ import { CarAddComponent } from './components/car-add/car-add.component';
 import { CarUpdateComponent } from './components/car-update/car-update.component';
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 import { BrandUpdateComponent } from './components/brand-update/brand-update.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { UserComponent } from './components/user/user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +52,9 @@ import { BrandUpdateComponent } from './components/brand-update/brand-update.com
     CarUpdateComponent,
     ColorUpdateComponent,
     BrandUpdateComponent,
+    LoginComponent,
+    RegisterComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +73,8 @@ import { BrandUpdateComponent } from './components/brand-update/brand-update.com
   ],
   providers: [
     DatePipe,
+    //HTTP_INTERCEPTORS global injection
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

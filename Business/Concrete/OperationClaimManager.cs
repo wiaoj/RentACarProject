@@ -10,7 +10,7 @@ using Core.Utilities.Result.Concrete.Success;
 using DataAccess.Abstract;
 
 namespace Business.Concrete {
-    [SecuredOperation("admin,operationClaims.admin")]
+    //[SecuredOperation("admin,operationClaims.admin")]
     public class OperationClaimManager : IOperationClaimService {
         private readonly IOperationClaimDal _operationClaimDal;
         public OperationClaimManager(IOperationClaimDal operationClaimDal) => _operationClaimDal = operationClaimDal;

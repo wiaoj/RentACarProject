@@ -8,7 +8,7 @@ using Core.Utilities.Result.Concrete.Success;
 using DataAccess.Abstract;
 
 namespace Business.Concrete {
-    [SecuredOperation("admin")]
+    //[SecuredOperation("admin")]
     public class UserOperationClaimManager : IUserOperationClaimService {
         private readonly IUserOperationClaimDal _userOperationClaimDal;
         public UserOperationClaimManager(IUserOperationClaimDal userOperationClaimDal) => _userOperationClaimDal = userOperationClaimDal;
