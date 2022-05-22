@@ -30,6 +30,7 @@ namespace Business.Concrete {
             return new SuccessResult(Messages.BrandRemoved);
         }
 
+        [SecuredOperation("admin,brand.admin")]
         [CacheAspect]
         public IDataResult<List<Brand>> GetAll() {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());

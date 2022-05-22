@@ -3,7 +3,14 @@ using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 
+while (true) {
+    if (Console.ReadKey().Key == ConsoleKey.Enter) {
 
+        Console.WriteLine(Guid.NewGuid());
+    }else {
+        break;
+    }
+}
 
 GetCar();
 Console.WriteLine(new String('-', 20));

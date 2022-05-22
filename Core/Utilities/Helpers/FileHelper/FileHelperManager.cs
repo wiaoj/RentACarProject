@@ -27,7 +27,7 @@ namespace Core.Utilities.Helpers.FileHelper {
 
             if (File.Exists(filePath)) { //if kontrolü ile parametrede gelen adreste öyle bir dosya var mı diye kontrol ediliyor.
 
-                File.Delete(filePath);//Eğer dosya var ise dosya bulunduğu yerden siliniyor.
+                File.Delete(filePath); //Eğer dosya var ise dosya bulunduğu yerden siliniyor.
             }
         }
 

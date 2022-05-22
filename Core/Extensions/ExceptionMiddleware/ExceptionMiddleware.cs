@@ -3,6 +3,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using System.Net;
+using System.Security;
 
 namespace Core.Extensions.ExceptionMiddleware {
     public class ExceptionMiddleware {
